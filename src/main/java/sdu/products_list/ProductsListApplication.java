@@ -11,13 +11,5 @@ public class ProductsListApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ProductsListApplication.class, args);
 	}
-	@Bean
-	public CommandLineRunner commandLineRunner(String[] args){
-
-		return runner -> {
-			System.out.println("Hello world");
-		};
-
-	}
 
 }
