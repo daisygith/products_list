@@ -18,4 +18,9 @@ public class ProductsListServiceImpl implements ProductsListService{
     public List<ProductsList> findAllProducts(){
         return productsListDAO.findAllProducts();
     }
+
+    @Override
+    public ProductsList findById(int theId) {
+        return productsListDAO.findById(theId);
+    }
 }
