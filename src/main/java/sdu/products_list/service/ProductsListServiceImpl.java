@@ -13,10 +13,6 @@ public class ProductsListServiceImpl implements ProductsListService{
     @Autowired
     private ProductsListDAO productsListDAO;
 
-//    @Autowired
-//    public ProductsListServiceImpl(ProductsListDAO theProductsListDAO){
-//        productsListDAO = theProductsListDAO;
-//    }
 
     @Override
     public List<ProductsList> findAllProducts(){
