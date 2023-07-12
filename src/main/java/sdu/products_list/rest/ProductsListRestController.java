@@ -16,10 +16,7 @@ public class ProductsListRestController {
 
     @Autowired
     private ProductsListService productsListService;
-//
-//    public ProductsListRestController(ProductsListService theProductsListService){
-//        productsListService = theProductsListService;
-//    }
+
 
     @GetMapping("/productslist")
     public List<ProductsList> findAllProducts(){
