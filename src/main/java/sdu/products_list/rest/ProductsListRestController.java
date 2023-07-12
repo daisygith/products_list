@@ -3,6 +3,7 @@ package sdu.products_list.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sdu.products_list.entity.ProductsList;
@@ -23,5 +24,15 @@ public class ProductsListRestController {
         return productsListService.findAllProducts();
     }
 
+    @GetMapping("/productslist/{productslistId}")
+    public ProductsList getProductsList(@PathVariable int productslistId){
+        ProductsList theProductsList = productsListService.findById(productslistId);
+
+        if(theProductsList == null){
+            throw new RuntimeException("Products List id not found" + productslistId);
+        }
+        return theProductsList;
+
+    }
 
 }
