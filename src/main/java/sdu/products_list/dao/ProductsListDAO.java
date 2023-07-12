@@ -7,4 +7,6 @@ import java.util.List;
 public interface ProductsListDAO {
 
     List<ProductsList> findAllProducts();
+
+    ProductsList findById(int theId);
 }
