@@ -29,5 +29,14 @@ public class ProductsListDAOImpl implements ProductsListDAO{
         List<ProductsList> productslist = query.getResultList();
 
         return productslist;
+
+    }
+
+    @Override
+    public ProductsList findById(int theId) {
+
+        ProductsList theProductsList = entityManager.find(ProductsList.class, theId);
+
+        return theProductsList;
     }
 }
