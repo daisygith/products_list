@@ -2,6 +2,7 @@ package sdu.products_list.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import sdu.products_list.dao.ProductsListDAO;
 import sdu.products_list.entity.ProductsList;
 
@@ -23,9 +24,9 @@ public class ProductsListServiceImpl implements ProductsListService{
     public ProductsList findById(int theId) {
         return productsListDAO.findById(theId);
     }
-
+    @Transactional
     @Override
-    public ProductsList save(ProductsList theProductsList) {
-        return productsListDAO.save(theProductsList);
+    public ProductsList save(ProductsList theProducts) {
+        return productsListDAO.save(theProducts);
     }
 }
