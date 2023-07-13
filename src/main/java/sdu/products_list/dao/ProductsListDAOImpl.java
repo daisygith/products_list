@@ -39,4 +39,12 @@ public class ProductsListDAOImpl implements ProductsListDAO{
 
         return theProductsList;
     }
+
+    @Override
+    public ProductsList save(ProductsList theProductsList) {
+
+        ProductsList dbProductsList = entityManager.merge(theProductsList);
+
+        return dbProductsList;
+    }
 }

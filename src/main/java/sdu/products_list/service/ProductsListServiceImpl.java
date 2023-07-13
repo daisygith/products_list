@@ -23,4 +23,9 @@ public class ProductsListServiceImpl implements ProductsListService{
     public ProductsList findById(int theId) {
         return productsListDAO.findById(theId);
     }
+
+    @Override
+    public ProductsList save(ProductsList theProductsList) {
+        return productsListDAO.save(theProductsList);
+    }
 }
