@@ -2,10 +2,7 @@ package sdu.products_list.rest;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sdu.products_list.entity.ProductsList;
 import sdu.products_list.service.ProductsListService;
 
@@ -33,6 +30,16 @@ public class ProductsListRestController {
         }
         return theProductsList;
 
+    }
+
+    @PostMapping("/productslist")
+    public ProductsList addProducts(@RequestBody ProductsList theProducts){
+
+        theProducts.setId(0);
+
+        ProductsList dbProducts = productsListService.save(theProducts);
+
+        return dbProducts;
     }
 
 }
