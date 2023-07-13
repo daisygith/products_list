@@ -9,4 +9,6 @@ public interface ProductsListDAO {
     List<ProductsList> findAllProducts();
 
     ProductsList findById(int theId);
+
+    ProductsList save(ProductsList theProductsList);
 }

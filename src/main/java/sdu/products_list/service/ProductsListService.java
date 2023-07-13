@@ -10,4 +10,6 @@ public interface ProductsListService {
 
     ProductsList findById(int theId);
 
+    ProductsList save(ProductsList theProductsList);
+
 }
