@@ -42,4 +42,13 @@ public class ProductsListRestController {
         return dbProducts;
     }
 
+    @PutMapping("/productslist")
+    public ProductsList updateProducts(@RequestBody ProductsList theProducts){
+
+        ProductsList dbProducts = productsListService.save(theProducts);
+
+        return dbProducts;
+
+    }
+
 }
