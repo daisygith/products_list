@@ -52,17 +52,17 @@ public class ProductsListRestController {
     }
 
     @DeleteMapping("/productslist/{productslistId}")
-    public String deleteProducts(@PathVariable int productsId){
+    public String deleteProducts(@PathVariable int productslistId){
 
-        ProductsList tempProducts = productsListService.findById(productsId);
+        ProductsList tempProducts = productsListService.findById(productslistId);
 
         if(tempProducts == null){
-            throw new RuntimeException("Product is not found - " + productsId);
+            throw new RuntimeException("Product is not found - " + productslistId);
         }
 
-        productsListService.deleteById(productsId);
+        productsListService.deleteById(productslistId);
 
-        return "Delete products id - " + productsId;
+        return "Delete products id - " + productslistId;
     }
 
 }
