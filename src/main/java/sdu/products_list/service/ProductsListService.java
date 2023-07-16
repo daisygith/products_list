@@ -12,4 +12,6 @@ public interface ProductsListService {
 
     ProductsList save(ProductsList theProducts);
 
+    void deleteById(int theId);
+
 }
