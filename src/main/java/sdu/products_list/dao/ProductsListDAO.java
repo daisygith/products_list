@@ -11,4 +11,6 @@ public interface ProductsListDAO {
     ProductsList findById(int theId);
 
     ProductsList save(ProductsList theProducts);
+
+    void deleteById(int theId);
 }
