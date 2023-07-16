@@ -47,4 +47,13 @@ public class ProductsListDAOImpl implements ProductsListDAO{
 
         return dbProducts;
     }
+
+    @Override
+    public void deleteById(int theId) {
+        // first find the products on the list
+        ProductsList theProductsList = entityManager.find(ProductsList.class, theId);
+        // next remove this products
+        entityManager.remove(theProductsList);
+
+    }
 }
