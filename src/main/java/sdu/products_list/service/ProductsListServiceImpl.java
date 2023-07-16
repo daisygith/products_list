@@ -29,4 +29,10 @@ public class ProductsListServiceImpl implements ProductsListService{
     public ProductsList save(ProductsList theProducts) {
         return productsListDAO.save(theProducts);
     }
+
+    @Transactional
+    @Override
+    public void deleteById(int theId) {
+         productsListDAO.deleteById(theId);
+    }
 }
