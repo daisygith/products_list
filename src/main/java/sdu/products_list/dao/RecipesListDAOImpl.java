@@ -3,10 +3,12 @@ package sdu.products_list.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import sdu.products_list.entity.RecipesList;
 
 import java.util.List;
 
+@Repository
 public class RecipesListDAOImpl implements RecipesListDAO{
 
     //define fields for entitymanager
