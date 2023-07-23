@@ -33,4 +33,13 @@ public class RecipesListDAOImpl implements RecipesListDAO{
         //return the results
         return recipesLists;
     }
+
+    @Override
+    public RecipesList findById(int theId) {
+
+        // get recipe
+        RecipesList theRecipe = entityManager.find(RecipesList.class, theId);
+
+        return theRecipe;
+    }
 }
