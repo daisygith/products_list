@@ -29,4 +29,16 @@ public class RecipesListServiceImpl implements RecipesListService {
         return recipesListDAO.findById(theId);
 
     }
+
+    @Override
+    public RecipesList save(RecipesList theRecipe) {
+
+        return recipesListDAO.save(theRecipe);
+
+    }
+
+    @Override
+    public void deleteById(int theId) {
+        recipesListDAO.deleteById(theId);
+    }
 }

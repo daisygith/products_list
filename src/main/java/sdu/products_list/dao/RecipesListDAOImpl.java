@@ -42,4 +42,19 @@ public class RecipesListDAOImpl implements RecipesListDAO{
 
         return theRecipe;
     }
+
+    @Override
+    public RecipesList save(RecipesList theRecipe) {
+
+        RecipesList dbRecipe = entityManager.merge(theRecipe);
+
+        return dbRecipe;
+    }
+
+    @Override
+    public void deleteById(int theId) {
+        RecipesList theRecipe = entityManager.find(RecipesList.class, theId);
+
+        entityManager.remove(theRecipe);
+    }
 }
