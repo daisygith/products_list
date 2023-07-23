@@ -22,4 +22,11 @@ public class RecipesListServiceImpl implements RecipesListService {
         return recipesListDAO.findAll();
 
     }
+
+    @Override
+    public RecipesList findById(int theId) {
+
+        return recipesListDAO.findById(theId);
+
+    }
 }
