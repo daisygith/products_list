@@ -8,4 +8,6 @@ public interface RecipesListDAO {
 
     List<RecipesList> findAll();
 
+    RecipesList findById(int theId);
+
 }
