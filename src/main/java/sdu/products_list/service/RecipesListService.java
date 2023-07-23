@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface RecipesListService {
     List<RecipesList> findAll();
+
+    RecipesList findById(int theId);
 }
