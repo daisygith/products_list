@@ -2,6 +2,7 @@ package sdu.products_list.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import sdu.products_list.dao.ShopListDAO;
 import sdu.products_list.entity.ShopList;
 
@@ -29,11 +30,13 @@ public class ShopListServiceImpl implements ShopListService{
         return shopListDAO.findById(theId);
     }
 
+    @Transactional
     @Override
     public ShopList save(ShopList theShopList) {
         return shopListDAO.save(theShopList);
     }
 
+    @Transactional
     @Override
     public void deleteById(int theId) {
         shopListDAO.deleteById(theId);
