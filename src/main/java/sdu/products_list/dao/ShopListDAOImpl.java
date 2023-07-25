@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public class ShopListDAOImpl implements ShopListDAO{
 
+
     private EntityManager entityManager;
 
     @Autowired

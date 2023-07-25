@@ -2,15 +2,17 @@ package sdu.products_list.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sdu.products_list.dao.ShopListDAO;
 import sdu.products_list.entity.ShopList;
 
 import java.util.List;
 
-@Repository
+@Service
 public class ShopListServiceImpl implements ShopListService{
 
+    @Autowired
     private ShopListDAO shopListDAO;
 
     @Autowired
