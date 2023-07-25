@@ -65,11 +65,11 @@ public class RecipesListRestController {
         RecipesList tempRecipe = recipesListService.findById(recipeId);
 
         if(tempRecipe == null){
-            throw new RuntimeException("Recipe is not found " + recipeId);
+            throw new RuntimeException("Recipe is not found - " + recipeId);
         }
         recipesListService.deleteById(recipeId);
 
-        return "delete recipe by id " + recipeId;
+        return "delete recipe id - " + recipeId;
 
     }
 

@@ -16,8 +16,8 @@ public class RecipesListDAOImpl implements RecipesListDAO{
 
     // set up constructor injuction
     @Autowired
-    public RecipesListDAOImpl(EntityManager theEntityManager){
-        entityManager = theEntityManager;
+    public RecipesListDAOImpl(EntityManager entityManager){
+        this.entityManager = entityManager;
     }
 
     @Override
