@@ -1,7 +1,15 @@
 package sdu.products_list.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "recipes_list")
 public class RecipesList {
@@ -14,35 +22,4 @@ public class RecipesList {
     @Column(name = "name")
     private String name;
 
-    public RecipesList(String name) {
-        this.name = name;
-    }
-
-    public RecipesList() {
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "RecipesList{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }
