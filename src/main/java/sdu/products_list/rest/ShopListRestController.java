@@ -42,5 +42,25 @@ public class ShopListRestController {
         return dbShopList;
     }
 
+    @PutMapping("/shoplist")
+    public ShopList updateShopList(@RequestBody ShopList theShopList){
+
+        ShopList dbShopList = shopListService.save(theShopList);
+        return dbShopList;
+
+    }
+
+    @DeleteMapping("/shoplist/{shopListId}")
+    public String deleteShopList(@PathVariable int shopListId) {
+
+        ShopList tempShopList = shopListService.findById(shopListId);
+
+        if(tempShopList == null){
+            throw new RuntimeException("Product is not found - " + shopListId);
+        }
+
+        shopListService.deleteById(shopListId);
+        return "delete product id " + shopListId;
+    }
 
 }
