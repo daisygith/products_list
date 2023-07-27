@@ -24,6 +24,6 @@ public class ProductsList {
 
     @Column(name="unit")
     private String unit;
-    
+
 
 }
