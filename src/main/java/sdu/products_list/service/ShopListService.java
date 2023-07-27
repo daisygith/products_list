@@ -1,16 +1,17 @@
 package sdu.products_list.service;
 
-import sdu.products_list.entity.ShopList;
+import sdu.products_list.dto.ShopListDTO;
+
 
 import java.util.List;
 
 public interface ShopListService {
 
-    List<ShopList> findAll();
+    List<ShopListDTO> findAll();
 
-    ShopList findById(int theId);
+    ShopListDTO findById(int theId);
 
-    ShopList save(ShopList theShopList);
+    ShopListDTO save(ShopListDTO theShopList);
 
     void deleteById(int theId);
 
