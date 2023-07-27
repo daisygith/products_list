@@ -1,6 +1,5 @@
 package sdu.products_list.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,11 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShopListDTO {
+public class RecipesListDTO {
 
-    // dodanie kolumn
     private int id;
 
     private String name;
-
 }
