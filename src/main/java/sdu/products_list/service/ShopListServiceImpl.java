@@ -1,10 +1,8 @@
 package sdu.products_list.service;
 
-import org.apache.logging.log4j.CloseableThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 import sdu.products_list.dao.ShopListDAO;
 import sdu.products_list.dto.ShopListDTO;
 import sdu.products_list.entity.ShopList;
@@ -43,10 +41,6 @@ public class ShopListServiceImpl implements ShopListService{
 
     }
 
-//    @Override
-//    public ShopListDTO save(ShopListDTO theShopList) {
-//        return null;
-//    }
 
     @Transactional
     @Override
@@ -66,7 +60,9 @@ public class ShopListServiceImpl implements ShopListService{
     @Transactional
     @Override
     public void deleteById(int theId) {
+
         shopListDAO.deleteById(theId);
+
     }
 
 
