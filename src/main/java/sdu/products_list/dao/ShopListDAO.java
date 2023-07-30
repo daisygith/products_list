@@ -1,5 +1,6 @@
 package sdu.products_list.dao;
 
+import sdu.products_list.dto.ShopListDTO;
 import sdu.products_list.entity.ShopList;
 
 import java.util.List;
