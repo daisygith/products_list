@@ -35,7 +35,7 @@ public class ShopListRestController {
     @PostMapping("/shoplist")
     public ShopListDTO addShopList(@RequestBody ShopListDTO theShopList){
 
-        theShopList.setId(0);
+//        theShopList.setId(0);
 
         ShopListDTO dbShopList = shopListService.save(theShopList);
 
