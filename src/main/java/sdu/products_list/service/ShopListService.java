@@ -11,7 +11,7 @@ public interface ShopListService {
 
     ShopListDTO findById(int theId);
 
-    ShopListDTO save(ShopListDTO theShopList);
+    ShopListDTO save(ShopListDTO theShopListDTO);
 
     void deleteById(int theId);
 
