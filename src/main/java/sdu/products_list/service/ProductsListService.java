@@ -1,16 +1,17 @@
 package sdu.products_list.service;
 
+import sdu.products_list.dto.ProductsListDTO;
 import sdu.products_list.entity.ProductsList;
 
 import java.util.List;
 
 public interface ProductsListService {
 
-    List<ProductsList> findAllProducts();
+    List<ProductsListDTO> findAllProducts();
 
-    ProductsList findById(int theId);
+    ProductsListDTO findById(int theId);
 
-    ProductsList save(ProductsList theProducts);
+    ProductsListDTO save(ProductsListDTO theProductsDTO);
 
     void deleteById(int theId);
 

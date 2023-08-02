@@ -3,6 +3,7 @@ package sdu.products_list.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sdu.products_list.dto.ProductsListDTO;
 import sdu.products_list.entity.ProductsList;
 import sdu.products_list.service.ProductsListService;
 
@@ -17,13 +18,13 @@ public class ProductsListRestController {
 
 
     @GetMapping("/productslist")
-    public List<ProductsList> findAllProducts(){
+    public List<ProductsListDTO> findAllProducts(){
         return productsListService.findAllProducts();
     }
 
     @GetMapping("/productslist/{productslistId}")
-    public ProductsList getProductsList(@PathVariable int productslistId){
-        ProductsList theProductsList = productsListService.findById(productslistId);
+    public ProductsListDTO getProductsList(@PathVariable int productslistId){
+        ProductsListDTO theProductsList = productsListService.findById(productslistId);
 
         if(theProductsList == null){
             throw new RuntimeException("Products List id not found" + productslistId);
@@ -33,19 +34,19 @@ public class ProductsListRestController {
     }
 
     @PostMapping("/productslist")
-    public ProductsList addProducts(@RequestBody ProductsList theProducts){
+    public ProductsListDTO addProducts(@RequestBody ProductsListDTO theProductsDTO){
 
-        theProducts.setId(0);
+        theProductsDTO.setId(0);
 
-        ProductsList dbProducts = productsListService.save(theProducts);
+        ProductsListDTO dbProducts = productsListService.save(theProductsDTO);
 
         return dbProducts;
     }
 
     @PutMapping("/productslist")
-    public ProductsList updateProducts(@RequestBody ProductsList theProducts){
+    public ProductsListDTO updateProducts(@RequestBody ProductsListDTO theProductsDTO){
 
-        ProductsList dbProducts = productsListService.save(theProducts);
+        ProductsListDTO dbProducts = productsListService.save(theProductsDTO);
 
         return dbProducts;
 
@@ -54,7 +55,7 @@ public class ProductsListRestController {
     @DeleteMapping("/productslist/{productslistId}")
     public String deleteProducts(@PathVariable int productslistId){
 
-        ProductsList tempProducts = productsListService.findById(productslistId);
+        ProductsListDTO tempProducts = productsListService.findById(productslistId);
 
         if(tempProducts == null){
             throw new RuntimeException("Product is not found - " + productslistId);
