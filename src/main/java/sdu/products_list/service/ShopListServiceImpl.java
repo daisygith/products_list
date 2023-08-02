@@ -45,6 +45,7 @@ public class ShopListServiceImpl implements ShopListService{
     @Transactional
     @Override
     public ShopListDTO save(ShopListDTO theShopListDTO) {
+
         // dla merge
         ShopList product = shopListDAO.save(new ShopList(theShopListDTO.getId(), theShopListDTO.getName()));
         // dla persist + trzebaby było rozbić na save i update
