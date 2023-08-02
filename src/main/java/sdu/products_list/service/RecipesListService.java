@@ -1,15 +1,16 @@
 package sdu.products_list.service;
 
+import sdu.products_list.dto.RecipesListDTO;
 import sdu.products_list.entity.RecipesList;
 
 import java.util.List;
 
 public interface RecipesListService {
-    List<RecipesList> findAll();
+    List<RecipesListDTO> findAll();
 
-    RecipesList findById(int theId);
+    RecipesListDTO findById(int theId);
 
-    RecipesList save(RecipesList theRecipe);
+    RecipesListDTO save(RecipesListDTO theRecipeDTO);
 
     void deleteById(int theId);
 }
