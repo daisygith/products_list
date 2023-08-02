@@ -2,6 +2,7 @@ package sdu.products_list.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sdu.products_list.dto.RecipesListDTO;
 import sdu.products_list.entity.RecipesList;
 import sdu.products_list.service.ProductsListService;
 import sdu.products_list.service.RecipesListService;
@@ -22,16 +23,16 @@ public class RecipesListRestController {
 
     // expose "/recipeslist" and return a list of employee
     @GetMapping("/recipeslist")
-    public List<RecipesList> findAll(){
+    public List<RecipesListDTO> findAll(){
 
         return recipesListService.findAll();
         }
 
         // add mapping for GET /recipeslist/{recipeID}
     @GetMapping("recipeslist/{recipeId}")
-    public RecipesList getRecipe(@PathVariable int recipeId){
+    public RecipesListDTO getRecipe(@PathVariable int recipeId){
 
-        RecipesList theRecipe = recipesListService.findById(recipeId);
+        RecipesListDTO theRecipe = recipesListService.findById(recipeId);
 
         if(theRecipe == null){
             throw new RuntimeException("Recipe id not found - " + recipeId);
@@ -40,20 +41,20 @@ public class RecipesListRestController {
     }
 
     @PostMapping("/recipeslist")
-    public RecipesList addRecipe(@RequestBody RecipesList theRecipe){
+    public RecipesListDTO addRecipe(@RequestBody RecipesListDTO theRecipe){
 
         theRecipe.setId(0);
 
-        RecipesList dbRecipe = recipesListService.save(theRecipe);
+        RecipesListDTO dbRecipe = recipesListService.save(theRecipe);
 
         return dbRecipe;
 
     }
 
     @PutMapping("/recipeslist")
-    public RecipesList updateRecipe(@RequestBody RecipesList theRecipe){
+    public RecipesListDTO updateRecipe(@RequestBody RecipesListDTO theRecipe){
 
-        RecipesList dbRecipe = recipesListService.save(theRecipe);
+        RecipesListDTO dbRecipe = recipesListService.save(theRecipe);
 
         return dbRecipe;
 
@@ -62,7 +63,7 @@ public class RecipesListRestController {
     @DeleteMapping("/recipeslist/{recipeId}")
     public String deleteRecipe(@PathVariable int recipeId){
 
-        RecipesList tempRecipe = recipesListService.findById(recipeId);
+        RecipesListDTO tempRecipe = recipesListService.findById(recipeId);
 
         if(tempRecipe == null){
             throw new RuntimeException("Recipe is not found - " + recipeId);
