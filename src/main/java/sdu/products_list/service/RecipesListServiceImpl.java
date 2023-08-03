@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sdu.products_list.dao.RecipesListDAO;
 import sdu.products_list.dto.RecipesListDTO;
+import sdu.products_list.dto.StepListDTO;
 import sdu.products_list.entity.RecipesList;
 
 import java.util.ArrayList;
@@ -24,7 +25,13 @@ public class RecipesListServiceImpl implements RecipesListService {
         List<RecipesListDTO> recipeListDTO = new ArrayList<>();
         //przepisanie wartosci z encji do DTO
         recipeList.forEach((RecipesList item) -> {
-            recipeListDTO.add(new RecipesListDTO(item.getId(), item.getName()));
+            recipeListDTO.add(new RecipesListDTO(item.getId(), item.getName(),
+                    StepListDTO
+                            .builder()
+                            .id(item.getStepList().getId())
+                            .stepNr(item.getStepList().getStepNr())
+                            .description(item.getStepList().getDescription())
+                            .build()));
         });
 
         return recipeListDTO;
