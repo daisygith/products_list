@@ -14,4 +14,6 @@ public class RecipesListDTO {
     private int id;
 
     private String name;
+
+    private StepListDTO stepList;
 }
