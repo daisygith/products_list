@@ -22,4 +22,7 @@ public class RecipesList {
     @Column(name = "name")
     private String name;
 
+    @OneToOne(mappedBy = "recipesList", fetch = FetchType.LAZY)
+    private StepList stepList;
+
 }
