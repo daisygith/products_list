@@ -24,47 +24,55 @@ public class RecipesListServiceImpl implements RecipesListService {
         //utworzenie pustej listy DTO
         List<RecipesListDTO> recipeListDTO = new ArrayList<>();
         //przepisanie wartosci z encji do DTO
-        recipeList.forEach((RecipesList item) -> {
-            recipeListDTO.add(new RecipesListDTO(item.getId(), item.getName(),
-                    StepListDTO
-                            .builder()
-                            .id(item.getStepList().getId())
-                            .stepNr(item.getStepList().getStepNr())
-                            .description(item.getStepList().getDescription())
-                            .build()));
-        });
+        //recipeList.forEach((RecipesList item) -> {
+//            recipeListDTO.add(new RecipesListDTO(item.getId(), item.getName(),
+//                    StepListDTO // new RecipesListDTO.builder().build() - mozna to przerobić tak jak jest StepList()
+//                            .builder()
+//                            .id(item.getStepList().getId())
+//                            .stepNr(item.getStepList().getStepNr())
+//                            .description(item.getStepList().getDescription())
+//                            .build()));
+            recipeList.forEach((RecipesList item) -> {
+                recipeListDTO.add(RecipesListDTO.builder()
+                        .id(item.getId())
+                        .name(item.getName())
+                        .build());
+            });
+
+        //});
 
         return recipeListDTO;
 
     }
 
-    @Override
-    public RecipesListDTO findById(int theId) {
-
-        RecipesList productRecipe = recipesListDAO.findById(theId);
-
-        RecipesListDTO productRecipeDTO = new RecipesListDTO(productRecipe.getId(), productRecipe.getName());
-
-        return productRecipeDTO;
-
-    }
-
-    @Transactional
-    @Override
-    public RecipesListDTO save(RecipesListDTO theRecipeDTO) {
-
-        RecipesList productRecipe = recipesListDAO.save(new RecipesList(theRecipeDTO.getId(), theRecipeDTO.getName()));
-
-        RecipesListDTO productRecipeDTO = new RecipesListDTO(productRecipe.getId(), productRecipe.getName());
-
-        return productRecipeDTO;
-
-    }
-
-    @Transactional
-    @Override
-    public void deleteById(int theId) {
-
-        recipesListDAO.deleteById(theId);
-    }
+//    @Override
+//    public RecipesListDTO findById(int theId) {
+//
+////        RecipesList productRecipe = recipesListDAO.findById(theId);
+////
+////        RecipesListDTO productRecipeDTO = new RecipesListDTO(productRecipe.getId(), productRecipe.getName());
+////
+////        return productRecipeDTO;
+//
+//
+//    }
+//
+//    @Transactional
+//    @Override
+//    public RecipesListDTO save(RecipesListDTO theRecipeDTO) {
+//
+//        RecipesList productRecipe = recipesListDAO.save(new RecipesList(theRecipeDTO.getId(), theRecipeDTO.getName()));
+//
+//        RecipesListDTO productRecipeDTO = new RecipesListDTO(productRecipe.getId(), productRecipe.getName());
+//
+//        return productRecipeDTO;
+//
+//    }
+//
+//    @Transactional
+//    @Override
+//    public void deleteById(int theId) {
+//
+//        recipesListDAO.deleteById(theId);
+//    }
 }
