@@ -45,34 +45,48 @@ public class RecipesListServiceImpl implements RecipesListService {
 
     }
 
-//    @Override
-//    public RecipesListDTO findById(int theId) {
-//
-////        RecipesList productRecipe = recipesListDAO.findById(theId);
-////
-////        RecipesListDTO productRecipeDTO = new RecipesListDTO(productRecipe.getId(), productRecipe.getName());
-////
-////        return productRecipeDTO;
-//
-//
-//    }
-//
-//    @Transactional
-//    @Override
-//    public RecipesListDTO save(RecipesListDTO theRecipeDTO) {
-//
+    @Override
+    public RecipesListDTO findById(int theId) {
+
+        RecipesList productRecipe = recipesListDAO.findById(theId);
+
+       // RecipesListDTO productRecipeDTO = new RecipesListDTO(productRecipe.getId(), productRecipe.getName());
+
+        RecipesListDTO productRecipeDTO = RecipesListDTO.builder()
+                .id(productRecipe.getId())
+                .name(productRecipe.getName())
+                .build();
+
+        return productRecipeDTO;
+
+    }
+
+    @Transactional
+    @Override
+    public RecipesListDTO save(RecipesListDTO theRecipeDTO) {
+
 //        RecipesList productRecipe = recipesListDAO.save(new RecipesList(theRecipeDTO.getId(), theRecipeDTO.getName()));
 //
 //        RecipesListDTO productRecipeDTO = new RecipesListDTO(productRecipe.getId(), productRecipe.getName());
-//
-//        return productRecipeDTO;
-//
-//    }
-//
-//    @Transactional
-//    @Override
-//    public void deleteById(int theId) {
-//
-//        recipesListDAO.deleteById(theId);
-//    }
+
+        RecipesList productRecipe = recipesListDAO.save(RecipesList.builder()
+                        .id(theRecipeDTO.getId())
+                        .name(theRecipeDTO.getName())
+                        .build());
+
+        RecipesListDTO productRecipeDTO = RecipesListDTO.builder()
+                .id(productRecipe.getId())
+                .name(productRecipe.getName())
+                .build();
+
+        return productRecipeDTO;
+
+    }
+
+    @Transactional
+    @Override
+    public void deleteById(int theId) {
+
+        recipesListDAO.deleteById(theId);
+    }
 }
