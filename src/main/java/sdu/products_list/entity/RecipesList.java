@@ -28,4 +28,12 @@ public class RecipesList {
     @OneToMany(mappedBy = "recipesList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StepList> stepList;
 
+    @OneToMany(mappedBy = "recipesList", fetch = FetchType.LAZY)
+    private List<RecipesListShop> recipesListShops;
+
+    @OneToMany(mappedBy = "recipesList", fetch = FetchType.LAZY)
+    private List<ProductsListRecipe> productsListRecipes;
+
+
+
 }
