@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -15,5 +17,5 @@ public class RecipesListDTO {
 
     private String name;
 
-    private StepListDTO stepList;
+    private List<StepListDTO> stepList;
 }
