@@ -19,5 +19,8 @@ public class RecipesListShop {
     @Column(name ="id")
     private int id;
 
+    @ManyToOne
+    @JoinColumn(name = "recipes_list_id", nullable = true)
+    private RecipesList recipesList;
 
 }
