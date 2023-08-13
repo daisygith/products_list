@@ -18,4 +18,8 @@ public class RecipesListDTO {
     private String name;
 
     private List<StepListDTO> stepList;
+
+    private List<RecipesListShopDTO> recipesListShop;
+
+    private List<ProductsListRecipeDTO> productsListRecipe;
 }
