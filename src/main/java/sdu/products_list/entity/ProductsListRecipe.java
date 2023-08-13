@@ -22,4 +22,8 @@ public class ProductsListRecipe {
     @Column(name = "qty")
     private float gty;
 
+    @ManyToOne
+    @JoinColumn(name = "recipes_list_id", nullable = true)
+    private RecipesList recipesList;
+
 }
