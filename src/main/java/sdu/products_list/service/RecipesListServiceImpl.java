@@ -3,12 +3,14 @@ package sdu.products_list.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sdu.products_list.dto.ProductsListRecipeDTO;
+import sdu.products_list.dto.RecipesListShopDTO;
+import sdu.products_list.entity.RecipesList;
 import sdu.products_list.dao.RecipesListDAO;
 import sdu.products_list.dto.RecipesListDTO;
 import sdu.products_list.dto.StepListDTO;
-import sdu.products_list.entity.RecipesList;
-import sdu.products_list.entity.ShopList;
 import sdu.products_list.entity.StepList;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +52,14 @@ public class RecipesListServiceImpl implements RecipesListService {
                         .map(x->StepListDTO.builder()
                         .id(x.getId()).stepNr(x.getStepNr()).description(x.getDescription())
                                 .build()).collect(Collectors.toList()))
+                .recipesListShop(productRecipe.getRecipesListShops().stream()
+                        .map(x-> RecipesListShopDTO.builder()
+                                .id(x.getId())
+                        .build()).collect(Collectors.toList()))
+                .productsListRecipe(productRecipe.getProductsListRecipes().stream()
+                        .map(x-> ProductsListRecipeDTO.builder()
+                                .id(x.getId()).gty(x.getGty())
+                        .build()).collect(Collectors.toList()))
                 .build();
 
         return productRecipeDTO;
