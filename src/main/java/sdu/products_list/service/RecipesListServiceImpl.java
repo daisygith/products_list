@@ -49,11 +49,7 @@ public class RecipesListServiceImpl implements RecipesListService {
     @Override
     public RecipesListDTO findById(int theId) {
 
-     //   List<StepListDTO> stepListDTO = new ArrayList<>();
-
         RecipesList productRecipe = recipesListDAO.findById(theId);
-
-       // RecipesListDTO productRecipeDTO = new RecipesListDTO(productRecipe.getId(), productRecipe.getName());
 
         RecipesListDTO productRecipeDTO = RecipesListDTO.builder()
                 .id(productRecipe.getId())
