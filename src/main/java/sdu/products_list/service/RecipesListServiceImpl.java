@@ -7,6 +7,8 @@ import sdu.products_list.dao.RecipesListDAO;
 import sdu.products_list.dto.RecipesListDTO;
 import sdu.products_list.dto.StepListDTO;
 import sdu.products_list.entity.RecipesList;
+import sdu.products_list.entity.ShopList;
+import sdu.products_list.entity.StepList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,22 +27,12 @@ public class RecipesListServiceImpl implements RecipesListService {
         //utworzenie pustej listy DTO
         List<RecipesListDTO> recipeListDTO = new ArrayList<>();
         //przepisanie wartosci z encji do DTO
-        //recipeList.forEach((RecipesList item) -> {
-//            recipeListDTO.add(new RecipesListDTO(item.getId(), item.getName(),
-//                    StepListDTO // new RecipesListDTO.builder().build() - mozna to przerobić tak jak jest StepList()
-//                            .builder()
-//                            .id(item.getStepList().getId())
-//                            .stepNr(item.getStepList().getStepNr())
-//                            .description(item.getStepList().getDescription())
-//                            .build()));
             recipeList.forEach((RecipesList item) -> {
                 recipeListDTO.add(RecipesListDTO.builder()
                         .id(item.getId())
                         .name(item.getName())
                         .build());
             });
-
-        //});
 
         return recipeListDTO;
 
@@ -63,28 +55,35 @@ public class RecipesListServiceImpl implements RecipesListService {
         return productRecipeDTO;
 
     }
-//
-//    @Transactional
-//    @Override
-//    public RecipesListDTO save(RecipesListDTO theRecipeDTO) {
-//
-////        RecipesList productRecipe = recipesListDAO.save(new RecipesList(theRecipeDTO.getId(), theRecipeDTO.getName()));
-////
-////        RecipesListDTO productRecipeDTO = new RecipesListDTO(productRecipe.getId(), productRecipe.getName());
-//
-//        RecipesList productRecipe = recipesListDAO.save(RecipesList.builder()
-//                        .id(theRecipeDTO.getId())
-//                        .name(theRecipeDTO.getName())
-//                        .build());
-//
-//        RecipesListDTO productRecipeDTO = RecipesListDTO.builder()
-//                .id(productRecipe.getId())
-//                .name(productRecipe.getName())
-//                .build();
-//
-//        return productRecipeDTO;
-//
-//    }
+
+    @Transactional
+    @Override
+    public RecipesListDTO save(RecipesListDTO theRecipeDTO) {
+
+        RecipesList productRecipe = recipesListDAO.save(RecipesList.builder()
+                        .id(theRecipeDTO.getId())
+                        .name(theRecipeDTO.getName())
+                        .stepList(theRecipeDTO.getStepList() != null ? theRecipeDTO.getStepList().stream()
+                                .map(x-> StepList.builder()
+                                        .id(x.getId()).stepNr(x.getStepNr()).description(x.getDescription())
+                                .build()).collect(Collectors.toList()) : null)
+                        .build());
+
+        RecipesListDTO productRecipeDTO = RecipesListDTO.builder()
+                .id(productRecipe.getId())
+                .name(productRecipe.getName())
+                .build();
+
+        if (productRecipe.getStepList() != null) {
+            productRecipeDTO.setStepList(productRecipe.getStepList().stream()
+                        .map(x->StepListDTO.builder()
+                                .id(x.getId()).stepNr(x.getStepNr()).description(x.getDescription())
+                        .build()).collect(Collectors.toList()));
+        }
+
+        return productRecipeDTO;
+
+    }
 
     @Transactional
     @Override
