@@ -25,9 +25,10 @@ public class StepList {
     @Column(name = "description")
     private String description;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId("id")
-    @JoinColumn(name = "recipes_list_id")
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @MapsId("id")
+    @ManyToOne
+    @JoinColumn(name = "recipes_list_id", nullable = true)
     private RecipesList recipesList;
 
 
