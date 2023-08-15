@@ -23,4 +23,7 @@ public class RecipesListShop {
     @JoinColumn(name = "recipes_list_id", nullable = true)
     private RecipesList recipesList;
 
+    @ManyToOne
+    @JoinColumn(name = "shop_list_id", nullable = true)
+    private ShopList shopList;
 }
