@@ -15,4 +15,6 @@ public class RecipesListShopDTO {
     private int id;
     private RecipesListDTO recipesList;
 
+    private ShopListDTO shopList;
+
 }
