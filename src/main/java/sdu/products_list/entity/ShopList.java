@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -22,5 +24,9 @@ public class ShopList {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "shopList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<RecipesListShop> recipesListShopList;
+
 
 }
