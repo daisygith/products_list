@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -28,11 +29,25 @@ public class RecipesList {
     @OneToMany(mappedBy = "recipesList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StepList> stepList;
 
-    @OneToMany(mappedBy = "recipesList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<RecipesListShop> recipesListShops;
+//    @OneToMany(mappedBy = "recipesList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<RecipesListShop> recipesListShops;
 
     @OneToMany(mappedBy = "recipesList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ProductsListRecipe> productsListRecipes;
+
+//    @ManyToMany(fetch = FetchType.EAGER,
+//            cascade = CascadeType.ALL)
+//    //  @JoinColumn(name = "shop_list_id", nullable = true)
+//
+//    @JoinTable(
+//            name = "recipes_list_shop",
+//            joinColumns = @JoinColumn(name = "recipes_list_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "shop_list_id", referencedColumnName = "id")
+//
+//    )
+//    private Set<ShopList> shopListSet;
+    @OneToMany(mappedBy = "recipesList")
+    private Set<RecipesListShop> recipeListShops;
 
 
 

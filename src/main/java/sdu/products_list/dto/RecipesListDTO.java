@@ -19,7 +19,9 @@ public class RecipesListDTO {
 
     private List<StepListDTO> stepList;
 
-    private List<RecipesListShopDTO> recipesListShop;
+   // private List<RecipesListShopDTO> recipesListShop;
 
     private List<ProductsListRecipeDTO> productsListRecipe;
+
+    private List<ShopListDTO> shopListSet;
 }

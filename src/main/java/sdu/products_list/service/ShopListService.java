@@ -10,8 +10,8 @@ public interface ShopListService {
     List<ShopListDTO> findAll();
 
     ShopListDTO findById(int theId);
-
-    ShopListDTO save(ShopListDTO theShopListDTO);
+//
+//    ShopListDTO save(ShopListDTO theShopListDTO);
 
     void deleteById(int theId);
 

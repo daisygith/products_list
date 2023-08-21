@@ -20,6 +20,6 @@ public class ProductsListShop {
     private int id;
 
     @Column(name = "gty")
-    private float gty;
+    private float qty;
 
 }

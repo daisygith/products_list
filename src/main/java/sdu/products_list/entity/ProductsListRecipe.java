@@ -20,7 +20,7 @@ public class ProductsListRecipe {
     private int id;
 
     @Column(name = "qty")
-    private float gty;
+    private float qty;
 
     @ManyToOne
     @JoinColumn(name = "recipes_list_id", nullable = true)

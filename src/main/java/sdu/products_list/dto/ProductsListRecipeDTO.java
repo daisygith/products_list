@@ -15,7 +15,7 @@ public class ProductsListRecipeDTO {
 
     private int id;
 
-    private float gty;
+    private float qty;
 
     private RecipesListDTO recipesList;
 

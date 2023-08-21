@@ -19,6 +19,6 @@ public class ShopListDTO {
 
     private String name;
 
-    private List<RecipesListShopDTO> recipesListShop;
+    private List<RecipesListDTO> recipesListSet;
 
 }

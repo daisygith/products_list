@@ -6,24 +6,24 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name="recipes_list_shop")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "recipes_list_shop")
 public class RecipesListShop {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
-    private int id;
+    @EmbeddedId
+    RecipesListShopKey id;
 
     @ManyToOne
-    @JoinColumn(name = "recipes_list_id", nullable = true)
-    private RecipesList recipesList;
+    @MapsId("shopListId")
+    @JoinColumn(name = "shop_list_id")
+    ShopList shopList;
 
     @ManyToOne
-    @JoinColumn(name = "shop_list_id", nullable = true)
-    private ShopList shopList;
+    @MapsId("recipesListId")
+    @JoinColumn(name = "recipes_list_id")
+    RecipesList recipesList;
+
 }
