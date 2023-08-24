@@ -29,25 +29,19 @@ public class RecipesList {
     @OneToMany(mappedBy = "recipesList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StepList> stepList;
 
-//    @OneToMany(mappedBy = "recipesList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<RecipesListShop> recipesListShops;
 
     @OneToMany(mappedBy = "recipesList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ProductsListRecipe> productsListRecipes;
 
-//    @ManyToMany(fetch = FetchType.EAGER,
-//            cascade = CascadeType.ALL)
-//    //  @JoinColumn(name = "shop_list_id", nullable = true)
-//
-//    @JoinTable(
-//            name = "recipes_list_shop",
-//            joinColumns = @JoinColumn(name = "recipes_list_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "shop_list_id", referencedColumnName = "id")
-//
-//    )
-//    private Set<ShopList> shopListSet;
-    @OneToMany(mappedBy = "recipesList")
-    private Set<RecipesListShop> recipeListShops;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "recipes_list_shop",
+            joinColumns = @JoinColumn(name = "recipes_list_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "shop_list_id", referencedColumnName = "id")
+
+    )
+    private List<ShopList> shopList;
 
 
 

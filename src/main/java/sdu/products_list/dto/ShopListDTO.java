@@ -1,5 +1,6 @@
 package sdu.products_list.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +20,7 @@ public class ShopListDTO {
 
     private String name;
 
+    @JsonIgnore
     private List<RecipesListDTO> recipesListSet;
 
 }

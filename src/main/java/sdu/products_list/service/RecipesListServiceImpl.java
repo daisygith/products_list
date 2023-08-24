@@ -43,7 +43,8 @@ public class RecipesListServiceImpl implements RecipesListService {
 
         RecipesList productRecipe = recipesListDAO.findById(theId);
 
-        productRecipe.getRecipeListShops();
+//        productRecipe.getRecipeListShops();
+        productRecipe.getShopList();
 
         RecipesListDTO productRecipeDTO = RecipesListDTO.builder()
                 .id(productRecipe.getId())
@@ -52,14 +53,10 @@ public class RecipesListServiceImpl implements RecipesListService {
                         .map(x->StepListDTO.builder()
                         .id(x.getId()).stepNr(x.getStepNr()).description(x.getDescription())
                                 .build()).collect(Collectors.toList()))
-//                .recipesListShop(productRecipe.getRecipesListShops().stream()
-//                        .map(x-> RecipesListShopDTO.builder()
-//                                .id(x.getId())
-//                        .build()).collect(Collectors.toList()))
-                .shopListSet(productRecipe.getRecipeListShops().stream()
+                .shopListSet(productRecipe.getShopList().stream()
                         .map(x-> ShopListDTO.builder()
-                                .id(x.getShopList().getId())
-                                .name(x.getShopList().getName())
+                                .id(x.getId())
+                                .name(x.getName())
                                 .build()).collect(Collectors.toList()))
                 .productsListRecipe(productRecipe.getProductsListRecipes().stream()
                         .map(x-> ProductsListRecipeDTO.builder()
