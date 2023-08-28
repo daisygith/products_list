@@ -31,36 +31,36 @@ public class ShopListRestController {
         return theShopList;
 
     }
-//
-//    @PostMapping("/shoplist")
-//    public ShopListDTO addShopList(@RequestBody ShopListDTO theShopList){
-//
-////        theShopList.setId(0);
-//
-//        ShopListDTO dbShopList = shopListService.save(theShopList);
-//
-//        return dbShopList;
-//    }
-//
-//    @PutMapping("/shoplist")
-//    public ShopListDTO updateShopList(@RequestBody ShopListDTO theShopList){
-//
-//        ShopListDTO dbShopList = shopListService.save(theShopList);
-//        return dbShopList;
-//
-//    }
-//
-//    @DeleteMapping("/shoplist/{shopListId}")
-//    public String deleteShopList(@PathVariable int shopListId) {
-//
-//        ShopListDTO tempShopList = shopListService.findById(shopListId);
-//
-//        if(tempShopList == null){
-//            throw new RuntimeException("Product is not found - " + shopListId);
-//        }
-//
-//        shopListService.deleteById(shopListId);
-//        return "delete product id " + shopListId;
-//    }
+
+    @PostMapping("/shoplist")
+    public ShopListDTO addShopList(@RequestBody ShopListDTO theShopList){
+
+//        theShopList.setId(0);
+
+        ShopListDTO dbShopList = shopListService.save(theShopList);
+
+        return dbShopList;
+    }
+
+    @PutMapping("/shoplist")
+    public ShopListDTO updateShopList(@RequestBody ShopListDTO theShopList){
+
+        ShopListDTO dbShopList = shopListService.save(theShopList);
+        return dbShopList;
+
+    }
+
+    @DeleteMapping("/shoplist/{shopListId}")
+    public String deleteShopList(@PathVariable int shopListId) {
+
+        ShopListDTO tempShopList = shopListService.findById(shopListId);
+
+        if(tempShopList == null){
+            throw new RuntimeException("Product is not found - " + shopListId);
+        }
+
+        shopListService.deleteById(shopListId);
+        return "delete product id " + shopListId;
+    }
 
 }
