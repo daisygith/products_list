@@ -21,6 +21,6 @@ public class ShopListDTO {
     private String name;
 
     @JsonIgnore
-    private List<RecipesListDTO> recipesListSet;
+    private List<RecipesListDTO> recipesList;
 
 }
