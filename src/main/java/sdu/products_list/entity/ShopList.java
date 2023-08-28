@@ -34,6 +34,6 @@ public class ShopList {
         inverseJoinColumns = @JoinColumn(name = "recipes_list_id", referencedColumnName = "id")
 
     )
-   private List<RecipesList> recipesListSet;
+   private List<RecipesList> recipesList;
 
 }
