@@ -1,5 +1,6 @@
 package sdu.products_list.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,5 +18,6 @@ public class StepListDTO {
 
     private String description;
 
+    @JsonIgnore
     private RecipesListDTO recipesList;
 }
