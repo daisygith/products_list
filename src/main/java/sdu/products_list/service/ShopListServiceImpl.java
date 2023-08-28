@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sdu.products_list.dao.ShopListDAO;
 import sdu.products_list.dto.RecipesListDTO;
 import sdu.products_list.dto.ShopListDTO;
+import sdu.products_list.entity.RecipesList;
 import sdu.products_list.entity.ShopList;
 
 import java.util.ArrayList;
@@ -57,23 +58,41 @@ public class ShopListServiceImpl implements ShopListService{
         return productShopListDTO;
 
     }
-//
-//
-//    @Transactional
-//    @Override
-//    public ShopListDTO save(ShopListDTO theShopListDTO) {
-//
-//        // dla merge
-//        ShopList product = shopListDAO.save(new ShopList(theShopListDTO.getId(), theShopListDTO.getName()));
-//        // dla persist + trzebaby było rozbić na save i update
-//        //ShopList product = new ShopList(theShopListDTO.getId(), theShopListDTO.getName());
-//        //shopListDAO.save(product);
-//
-//        ShopListDTO productDTO = new ShopListDTO(product.getId(), product.getName());
-//
-//        return productDTO;
-//        //return shopListDAO.save(theShopList);
-//    }
+
+
+    @Transactional
+    @Override
+    public ShopListDTO save(ShopListDTO theShopListDTO) {
+
+        // dla merge
+        //ShopList product = shopListDAO.save(new ShopList(theShopListDTO.getId(), theShopListDTO.getName()));
+        // dla persist + trzebaby było rozbić na save i update
+        //ShopList product = new ShopList(theShopListDTO.getId(), theShopListDTO.getName());
+        //shopListDAO.save(product);
+        ShopList productList = shopListDAO.save(ShopList.builder()
+                        .id(theShopListDTO.getId())
+                        .name(theShopListDTO.getName())
+                        .recipesList(theShopListDTO.getRecipesList() != null ? theShopListDTO.getRecipesList().stream()
+                .map(x-> RecipesList.builder()
+                        .id(x.getId()).name(x.getName())
+                        .build()).collect(Collectors.toList()) : null)
+         .build());
+
+        ShopListDTO productListDTO = ShopListDTO.builder()
+                .id(productList.getId())
+                .name(productList.getName())
+                .build();
+
+        if(productList.getRecipesList() != null) {
+            productListDTO.setRecipesList(productList.getRecipesList().stream()
+                    .map(x->RecipesListDTO.builder()
+                            .id(x.getId()).name(x.getName())
+                            .build()).collect(Collectors.toList()));
+        }
+
+        return productListDTO;
+        //return shopListDAO.save(theShopList);
+    }
 
     @Transactional
     @Override
