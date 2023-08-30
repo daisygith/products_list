@@ -26,4 +26,9 @@ public class ProductsListRecipe {
     @JoinColumn(name = "recipes_list_id", nullable = true)
     private RecipesList recipesList;
 
+    @ManyToOne
+    @JoinColumn(name = "products_list_id", nullable = true)
+    private ProductsList productsList;
+
+
 }
