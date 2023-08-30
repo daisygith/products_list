@@ -9,10 +9,10 @@ public interface ProductsListService {
 
     List<ProductsListDTO> findAllProducts();
 
-    ProductsListDTO findById(int theId);
-
-    ProductsListDTO save(ProductsListDTO theProductsDTO);
-
-    void deleteById(int theId);
+//    ProductsListDTO findById(int theId);
+//
+//    ProductsListDTO save(ProductsListDTO theProductsDTO);
+//
+//    void deleteById(int theId);
 
 }
