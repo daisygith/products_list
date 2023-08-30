@@ -25,36 +25,40 @@ public class ProductsListServiceImpl implements ProductsListService{
         List<ProductsListDTO> productsListDTO = new ArrayList<>();
 
         productsList.forEach((ProductsList item) -> {
-            productsListDTO.add(new ProductsListDTO(item.getId(), item.getName(), item.getUnit()));
+            productsListDTO.add(ProductsListDTO.builder()
+                            .id(item.getId())
+                            .name(item.getName())
+                            .unit(item.getUnit())
+                    .build());
         });
 
         return productsListDTO;
     }
-
-    @Override
-    public ProductsListDTO findById(int theId) {
-
-        ProductsList productList = productsListDAO.findById(theId);
-
-        ProductsListDTO productListDTO = new ProductsListDTO(productList.getId(), productList.getName(), productList.getUnit());
-
-        return productListDTO;
-    }
-
-    @Transactional
-    @Override
-    public ProductsListDTO save(ProductsListDTO theProductsDTO) {
-
-        ProductsList productList = productsListDAO.save(new ProductsList(theProductsDTO.getId(), theProductsDTO.getName(), theProductsDTO.getUnit()));
-
-        ProductsListDTO productListDTO = new ProductsListDTO(productList.getId(), productList.getName(), productList.getUnit());
-
-        return productListDTO;
-    }
-
-    @Transactional
-    @Override
-    public void deleteById(int theId) {
-         productsListDAO.deleteById(theId);
-    }
+//
+//    @Override
+//    public ProductsListDTO findById(int theId) {
+//
+//        ProductsList productList = productsListDAO.findById(theId);
+//
+//        ProductsListDTO productListDTO = new ProductsListDTO(productList.getId(), productList.getName(), productList.getUnit());
+//
+//        return productListDTO;
+//    }
+//
+//    @Transactional
+//    @Override
+//    public ProductsListDTO save(ProductsListDTO theProductsDTO) {
+//
+//        ProductsList productList = productsListDAO.save(new ProductsList(theProductsDTO.getId(), theProductsDTO.getName(), theProductsDTO.getUnit()));
+//
+//        ProductsListDTO productListDTO = new ProductsListDTO(productList.getId(), productList.getName(), productList.getUnit());
+//
+//        return productListDTO;
+//    }
+//
+//    @Transactional
+//    @Override
+//    public void deleteById(int theId) {
+//         productsListDAO.deleteById(theId);
+//    }
 }
