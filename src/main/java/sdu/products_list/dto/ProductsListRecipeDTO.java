@@ -21,4 +21,7 @@ public class ProductsListRecipeDTO {
     @JsonIgnore
     private RecipesListDTO recipesList;
 
+    @JsonIgnore
+    private ProductsListDTO productsList;
+
 }
