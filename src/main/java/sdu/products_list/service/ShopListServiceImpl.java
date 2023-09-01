@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sdu.products_list.dao.ShopListDAO;
+import sdu.products_list.dto.ProductsListShopDTO;
 import sdu.products_list.dto.RecipesListDTO;
 import sdu.products_list.dto.ShopListDTO;
+import sdu.products_list.entity.ProductsListShop;
 import sdu.products_list.entity.RecipesList;
 import sdu.products_list.entity.ShopList;
 
@@ -45,6 +47,12 @@ public class ShopListServiceImpl implements ShopListService{
         ShopListDTO productShopListDTO = ShopListDTO.builder()
                 .id(productShopList.getId())
                 .name(productShopList.getName())
+                .productsListShop(productShopList.getProductsListShop().stream()
+                        .map(x-> ProductsListShopDTO.builder()
+                                .id(x.getId())
+                                .qty(x.getQty())
+                                .build()).collect(Collectors.toList()))
+
 //                .recipesListSet(productShopList.getRecipesListSet().stream()
 //                        .map(x-> RecipesListDTO.builder()
 //                                .id(x.getId())
@@ -76,6 +84,11 @@ public class ShopListServiceImpl implements ShopListService{
                 .map(x-> RecipesList.builder()
                         .id(x.getId()).name(x.getName())
                         .build()).collect(Collectors.toList()) : null)
+                        .productsListShop(theShopListDTO.getProductsListShop() !=null ? theShopListDTO.getProductsListShop().stream()
+                                .map(x-> ProductsListShop.builder()
+                                        .id(x.getId())
+                                        .qty(x.getQty())
+                                        .build()).collect(Collectors.toList()) : null)
          .build());
 
         ShopListDTO productListDTO = ShopListDTO.builder()
@@ -87,6 +100,14 @@ public class ShopListServiceImpl implements ShopListService{
             productListDTO.setRecipesList(productList.getRecipesList().stream()
                     .map(x->RecipesListDTO.builder()
                             .id(x.getId()).name(x.getName())
+                            .build()).collect(Collectors.toList()));
+        }
+
+        if(productList.getProductsListShop() !=null) {
+            productListDTO.setProductsListShop(productList.getProductsListShop().stream()
+                    .map(x->ProductsListShopDTO.builder()
+                            .id(x.getId())
+                            .qty(x.getQty())
                             .build()).collect(Collectors.toList()));
         }
 
