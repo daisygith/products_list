@@ -6,7 +6,10 @@ import org.springframework.transaction.annotation.Transactional;
 import sdu.products_list.dao.ProductsListDAO;
 import sdu.products_list.dto.ProductsListDTO;
 import sdu.products_list.dto.ProductsListRecipeDTO;
+import sdu.products_list.dto.ProductsListShopDTO;
 import sdu.products_list.entity.ProductsList;
+import sdu.products_list.entity.ProductsListRecipe;
+import sdu.products_list.entity.ProductsListShop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,25 +55,64 @@ public class ProductsListServiceImpl implements ProductsListService{
                                 .id(x.getId())
                                 .qty(x.getQty())
                                 .build()).collect(Collectors.toList()))
+                .productsListShop(productList.getProductsListShop().stream()
+                        .map(x-> ProductsListShopDTO.builder()
+                                .id(x.getId())
+                                .qty(x.getQty())
+                                .build()).collect(Collectors.toList()))
                 .build();
 
         return productListDTO;
     }
 
-//    @Transactional
-//    @Override
-//    public ProductsListDTO save(ProductsListDTO theProductsDTO) {
-//
-//        ProductsList productList = productsListDAO.save(new ProductsList(theProductsDTO.getId(), theProductsDTO.getName(), theProductsDTO.getUnit()));
-//
-//        ProductsListDTO productListDTO = new ProductsListDTO(productList.getId(), productList.getName(), productList.getUnit());
-//
-//        return productListDTO;
-//    }
-//
-//    @Transactional
-//    @Override
-//    public void deleteById(int theId) {
-//         productsListDAO.deleteById(theId);
-//    }
+    @Transactional
+    @Override
+    public ProductsListDTO save(ProductsListDTO theProductsDTO) {
+
+        ProductsList productList = productsListDAO.save(ProductsList.builder()
+                        .id(theProductsDTO.getId())
+                        .name(theProductsDTO.getName())
+                        .unit(theProductsDTO.getUnit())
+                        .productsListRecipes(theProductsDTO.getProductsListRecipe() != null ? theProductsDTO.getProductsListRecipe().stream()
+                                .map(x-> ProductsListRecipe.builder()
+                                        .id(x.getId())
+                                        .qty(x.getQty())
+                                        .build()).collect(Collectors.toList()): null)
+                        .productsListShop(theProductsDTO.getProductsListShop() != null ? theProductsDTO.getProductsListShop().stream()
+                                .map(x->ProductsListShop.builder()
+                                        .id(x.getId())
+                                        .qty(x.getQty())
+                                        .build()).collect(Collectors.toList()) : null)
+                .build());
+
+        ProductsListDTO productListDTO = ProductsListDTO.builder()
+                .id(productList.getId())
+                .name(productList.getName())
+                .unit(productList.getUnit())
+                .build();
+
+        if(productList.getProductsListRecipes() != null){
+            productListDTO.setProductsListRecipe(productList.getProductsListRecipes().stream()
+                    .map(x->ProductsListRecipeDTO.builder()
+                            .id(x.getId())
+                            .qty(x.getQty())
+                            .build()).collect(Collectors.toList()));
+        }
+
+        if(productList.getProductsListShop() != null){
+            productListDTO.setProductsListShop(productList.getProductsListShop().stream()
+                    .map(x->ProductsListShopDTO.builder()
+                            .id(x.getId())
+                            .qty(x.getQty())
+                            .build()).collect(Collectors.toList()));
+        }
+
+        return productListDTO;
+    }
+
+    @Transactional
+    @Override
+    public void deleteById(int theId) {
+         productsListDAO.deleteById(theId);
+    }
 }
