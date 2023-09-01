@@ -19,7 +19,15 @@ public class ProductsListShop {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "gty")
+    @Column(name = "qty")
     private float qty;
+
+    @ManyToOne
+    @JoinColumn(name = "products_list_id", nullable = true)
+    private ProductsList productsList;
+
+    @ManyToOne
+    @JoinColumn(name = "shop_list_id", nullable = true)
+    private ShopList shopList;
 
 }
