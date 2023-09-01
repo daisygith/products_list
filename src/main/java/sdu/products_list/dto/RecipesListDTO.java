@@ -20,8 +20,7 @@ public class RecipesListDTO {
     private List<StepListDTO> stepList;
 
    // private List<RecipesListShopDTO> recipesListShop;
-
+    private List<ShopListDTO> shopListSet;
     private List<ProductsListRecipeDTO> productsListRecipe;
 
-    private List<ShopListDTO> shopListSet;
 }
