@@ -44,6 +44,7 @@ public class RecipesListServiceImpl implements RecipesListService {
         RecipesList productRecipe = recipesListDAO.findById(theId);
 
 //        productRecipe.getRecipeListShops();
+        //many-to-many
         productRecipe.getShopList();
 
         RecipesListDTO productRecipeDTO = RecipesListDTO.builder()
