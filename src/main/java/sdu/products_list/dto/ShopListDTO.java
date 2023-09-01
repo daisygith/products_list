@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import sdu.products_list.entity.ProductsListShop;
 
 import java.util.List;
 
@@ -22,5 +23,9 @@ public class ShopListDTO {
 
     @JsonIgnore
     private List<RecipesListDTO> recipesList;
+    @JsonIgnore
+    private List<ShopListDTO> shopList;
+    //@JsonIgnore
+    private List<ProductsListShopDTO> productsListShop;
 
 }
