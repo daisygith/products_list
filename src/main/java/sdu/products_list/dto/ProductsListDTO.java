@@ -20,4 +20,6 @@ public class ProductsListDTO {
     private String unit;
 
     private List<ProductsListRecipeDTO> productsListRecipe;
+
+    private List<ProductsListShopDTO> productsListShop;
 }
