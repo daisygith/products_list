@@ -22,16 +22,16 @@ public class ProductsListRestController {
         return productsListService.findAllProducts();
     }
 
-//    @GetMapping("/productslist/{productslistId}")
-//    public ProductsListDTO getProductsList(@PathVariable int productslistId){
-//        ProductsListDTO theProductsList = productsListService.findById(productslistId);
-//
-//        if(theProductsList == null){
-//            throw new RuntimeException("Products List id not found" + productslistId);
-//        }
-//        return theProductsList;
-//
-//    }
+    @GetMapping("/productslist/{productslistId}")
+    public ProductsListDTO getProductsList(@PathVariable int productslistId){
+        ProductsListDTO theProductsList = productsListService.findById(productslistId);
+
+        if(theProductsList == null){
+            throw new RuntimeException("Products List id not found" + productslistId);
+        }
+        return theProductsList;
+
+    }
 //
 //    @PostMapping("/productslist")
 //    public ProductsListDTO addProducts(@RequestBody ProductsListDTO theProductsDTO){
