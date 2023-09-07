@@ -18,7 +18,6 @@ public class ProductsListRecipeDTO {
 
     private float qty;
 
-    //elements from ProductsListDTO
     private int productsListId;
 
     private String productsListName;
