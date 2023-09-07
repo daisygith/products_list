@@ -9,7 +9,7 @@ public interface ProductsListService {
 
     List<ProductsListDTO> findAllProducts();
 
-    ProductsListDTO findById(int theId);
+    ProductsListDTO findById(int theId) throws Exception;
 
     ProductsListDTO save(ProductsListDTO theProductsDTO);
 
