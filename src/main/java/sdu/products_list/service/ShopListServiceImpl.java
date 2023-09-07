@@ -7,6 +7,7 @@ import sdu.products_list.dao.ShopListDAO;
 import sdu.products_list.dto.ProductsListShopDTO;
 import sdu.products_list.dto.RecipesListDTO;
 import sdu.products_list.dto.ShopListDTO;
+import sdu.products_list.entity.ProductsList;
 import sdu.products_list.entity.ProductsListShop;
 import sdu.products_list.entity.RecipesList;
 import sdu.products_list.entity.ShopList;
@@ -23,19 +24,18 @@ public class ShopListServiceImpl implements ShopListService{
 
     @Override
     public List<ShopListDTO> findAll() {
-        // lista z wszystkimi elementami bazy danych
+
        List<ShopList> shopList = shopListDAO.findAllShopList();
-       // utworzenie pustej listy DTO
+
        List<ShopListDTO> shopListDTO = new ArrayList<>();
-        // przepisanie wartości z encji do obiektów dto
-        // modifikacja na builder / ponieważ doszło List<RecipesListShopDTO
+
        shopList.forEach((ShopList item) -> {
            shopListDTO.add(ShopListDTO.builder()
                    .id(item.getId())
                    .name(item.getName())
                    .build());
        });
-        // zwracanie listy DTO
+
        return shopListDTO;
     }
 
@@ -51,17 +51,13 @@ public class ShopListServiceImpl implements ShopListService{
                         .map(x-> ProductsListShopDTO.builder()
                                 .id(x.getId())
                                 .qty(x.getQty())
+                                .productsListId(x.getProductsList().getId())
+                                .productsListName(x.getProductsList().getName())
+                                .productsListUnit(x.getProductsList().getUnit())
                                 .build()).collect(Collectors.toList()))
-
-//                .recipesListSet(productShopList.getRecipesListSet().stream()
-//                        .map(x-> RecipesListDTO.builder()
-//                                .id(x.getId())
-//                                .name(x.getName())
-//                                .build()).collect(Collectors.toList()))
                 .build();
 
 
-        //ShopListDTO productDTO = new ShopListDTO(product.getId(), product.getName());
 
         return productShopListDTO;
 
@@ -72,47 +68,56 @@ public class ShopListServiceImpl implements ShopListService{
     @Override
     public ShopListDTO save(ShopListDTO theShopListDTO) {
 
-        // dla merge
-        //ShopList product = shopListDAO.save(new ShopList(theShopListDTO.getId(), theShopListDTO.getName()));
-        // dla persist + trzebaby było rozbić na save i update
-        //ShopList product = new ShopList(theShopListDTO.getId(), theShopListDTO.getName());
-        //shopListDAO.save(product);
-        ShopList productList = shopListDAO.save(ShopList.builder()
+        ShopList shopList1 = ShopList.builder()
                         .id(theShopListDTO.getId())
                         .name(theShopListDTO.getName())
-                        .recipesList(theShopListDTO.getRecipesList() != null ? theShopListDTO.getRecipesList().stream()
-                .map(x-> RecipesList.builder()
-                        .id(x.getId()).name(x.getName())
-                        .build()).collect(Collectors.toList()) : null)
-                        .productsListShop(theShopListDTO.getProductsListShop() !=null ? theShopListDTO.getProductsListShop().stream()
+                        .build();
+
+        shopList1.setRecipesList(theShopListDTO.getRecipesList() != null ? theShopListDTO.getRecipesList().stream()
+                                .map(x-> RecipesList.builder()
+                                        .id(x.getId())
+                                        .name(x.getName())
+                                        .build())
+                                .collect(Collectors.toList()) : null);
+
+        shopList1.setProductsListShop(theShopListDTO.getProductsListShop() !=null ? theShopListDTO.getProductsListShop().stream()
                                 .map(x-> ProductsListShop.builder()
                                         .id(x.getId())
                                         .qty(x.getQty())
-                                        .build()).collect(Collectors.toList()) : null)
-         .build());
+                                        .shopList(shopList1)
+                                        .productsList(ProductsList.builder()
+                                                .id(x.getProductsListId())
+                                                .name(x.getProductsListName())
+                                                .unit(x.getProductsListUnit())
+                                                .build())
+                                        .build()).collect(Collectors.toList()) : null);
 
-        ShopListDTO productListDTO = ShopListDTO.builder()
-                .id(productList.getId())
-                .name(productList.getName())
+        ShopList shopList = shopListDAO.save(shopList1);
+
+        ShopListDTO shopListDTO = ShopListDTO.builder()
+                .id(shopList.getId())
+                .name(shopList.getName())
                 .build();
 
-        if(productList.getRecipesList() != null) {
-            productListDTO.setRecipesList(productList.getRecipesList().stream()
+        if(shopList.getRecipesList() != null) {
+            shopListDTO.setRecipesList(shopList.getRecipesList().stream()
                     .map(x->RecipesListDTO.builder()
                             .id(x.getId()).name(x.getName())
                             .build()).collect(Collectors.toList()));
         }
 
-        if(productList.getProductsListShop() !=null) {
-            productListDTO.setProductsListShop(productList.getProductsListShop().stream()
+        if(shopList.getProductsListShop() !=null) {
+            shopListDTO.setProductsListShop(shopList.getProductsListShop().stream()
                     .map(x->ProductsListShopDTO.builder()
                             .id(x.getId())
                             .qty(x.getQty())
+                            .productsListId(x.getProductsList().getId())
+                            .productsListName(x.getProductsList().getName())
+                            .productsListUnit(x.getProductsList().getUnit())
                             .build()).collect(Collectors.toList()));
         }
 
-        return productListDTO;
-        //return shopListDAO.save(theShopList);
+        return shopListDTO;
     }
 
     @Transactional
