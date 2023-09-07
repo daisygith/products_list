@@ -24,5 +24,5 @@ public class ProductsListShopDTO {
     private String productsListName;
 
     private String productsListUnit;
-    
+
 }
