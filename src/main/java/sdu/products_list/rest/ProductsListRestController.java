@@ -19,16 +19,17 @@ public class ProductsListRestController {
 
     @GetMapping("/productslist")
     public List<ProductsListDTO> findAllProducts(){
+
         return productsListService.findAllProducts();
     }
 
     @GetMapping("/productslist/{productslistId}")
-    public ProductsListDTO getProductsList(@PathVariable int productslistId){
+    public ProductsListDTO getProductsList(@PathVariable int productslistId) throws Exception {
         ProductsListDTO theProductsList = productsListService.findById(productslistId);
 
-        if(theProductsList == null){
-            throw new RuntimeException("Products List id not found" + productslistId);
-        }
+//        if(theProductsList == null){
+//            throw new RuntimeException("Products List id not found" + productslistId);
+//        }
         return theProductsList;
 
     }
@@ -53,7 +54,7 @@ public class ProductsListRestController {
     }
 
     @DeleteMapping("/productslist/{productslistId}")
-    public String deleteProducts(@PathVariable int productslistId){
+    public String deleteProducts(@PathVariable int productslistId) throws Exception{
 
         ProductsListDTO tempProducts = productsListService.findById(productslistId);
 
