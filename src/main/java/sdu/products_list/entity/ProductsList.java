@@ -27,7 +27,7 @@ public class ProductsList {
     @Column(name="unit")
     private String unit;
 
-    @OneToMany(mappedBy = "productsList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "productsList", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<ProductsListRecipe> productsListRecipes;
 
     @OneToMany(mappedBy = "productsList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
