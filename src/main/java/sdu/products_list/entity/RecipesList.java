@@ -25,12 +25,10 @@ public class RecipesList {
     @Column(name = "name")
     private String name;
 
-   // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @OneToMany(mappedBy = "recipesList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StepList> stepList;
 
-
-    @OneToMany(mappedBy = "recipesList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "recipesList", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<ProductsListRecipe> productsListRecipes;
 
     @ManyToMany(fetch = FetchType.LAZY,
