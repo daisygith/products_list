@@ -22,11 +22,11 @@ public class ProductsListRecipe {
     @Column(name = "qty")
     private float qty;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "recipes_list_id", nullable = true)
     private RecipesList recipesList;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "products_list_id", nullable = true)
     private ProductsList productsList;
 
