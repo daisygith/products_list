@@ -18,9 +18,11 @@ public class ProductsListShopDTO {
     private int id;
 
     private float qty;
-    @JsonIgnore
-    private ProductsListDTO productsList;
-    @JsonIgnore
-    private ShopListDTO shopList;
 
+    private int productsListId;
+
+    private String productsListName;
+
+    private String productsListUnit;
+    
 }
