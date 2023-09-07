@@ -10,6 +10,7 @@ import sdu.products_list.dto.ProductsListShopDTO;
 import sdu.products_list.entity.ProductsList;
 import sdu.products_list.entity.ProductsListRecipe;
 import sdu.products_list.entity.ProductsListShop;
+import sdu.products_list.exception.ElementNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,28 +42,29 @@ public class ProductsListServiceImpl implements ProductsListService{
     }
 
     @Override
-    public ProductsListDTO findById(int theId) {
+    public ProductsListDTO findById(int theId) throws Exception{
 
-        ProductsList productList = productsListDAO.findById(theId);
+            ProductsList productList = productsListDAO.findById(theId).orElseThrow(()
+                    -> new ElementNotFoundException(theId, "Product"));
 
-        //ProductsListDTO productListDTO = new ProductsListDTO(productList.getId(), productList.getName(), productList.getUnit());
-        ProductsListDTO productListDTO = ProductsListDTO.builder()
-                .id(productList.getId())
-                .name(productList.getName())
-                .unit(productList.getUnit())
-                .productsListRecipe(productList.getProductsListRecipes().stream()
-                        .map(x-> ProductsListRecipeDTO.builder()
-                                .id(x.getId())
-                                .qty(x.getQty())
-                                .build()).collect(Collectors.toList()))
-                .productsListShop(productList.getProductsListShop().stream()
-                        .map(x-> ProductsListShopDTO.builder()
-                                .id(x.getId())
-                                .qty(x.getQty())
-                                .build()).collect(Collectors.toList()))
-                .build();
+            ProductsListDTO productListDTO = ProductsListDTO.builder()
+                    .id(productList.getId())
+                    .name(productList.getName())
+                    .unit(productList.getUnit())
+                    .productsListRecipe(productList.getProductsListRecipes().stream()
+                            .map(x -> ProductsListRecipeDTO.builder()
+                                    .id(x.getId())
+                                    .qty(x.getQty())
+                                    .build()).collect(Collectors.toList()))
+                    .productsListShop(productList.getProductsListShop().stream()
+                            .map(x -> ProductsListShopDTO.builder()
+                                    .id(x.getId())
+                                    .qty(x.getQty())
+                                    .build()).collect(Collectors.toList()))
+                    .build();
 
-        return productListDTO;
+            return productListDTO;
+
     }
 
     @Transactional
