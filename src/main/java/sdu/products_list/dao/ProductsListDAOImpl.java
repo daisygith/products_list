@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import sdu.products_list.entity.ProductsList;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ProductsListDAOImpl implements ProductsListDAO{
@@ -33,9 +34,9 @@ public class ProductsListDAOImpl implements ProductsListDAO{
     }
 
     @Override
-    public ProductsList findById(int theId) {
+    public Optional<ProductsList> findById(int theId) {
 
-        ProductsList theProductsList = entityManager.find(ProductsList.class, theId);
+        Optional<ProductsList> theProductsList = Optional.ofNullable(entityManager.find(ProductsList.class, theId));
 
         return theProductsList;
     }
