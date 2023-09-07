@@ -1,5 +1,6 @@
 package sdu.products_list.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,12 +15,9 @@ import java.util.List;
 public class RecipesListDTO {
 
     private int id;
-
     private String name;
-
     private List<StepListDTO> stepList;
-
-   // private List<RecipesListShopDTO> recipesListShop;
+    @JsonIgnore
     private List<ShopListDTO> shopListSet;
     private List<ProductsListRecipeDTO> productsListRecipe;
 
