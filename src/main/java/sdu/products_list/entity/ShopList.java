@@ -36,7 +36,7 @@ public class ShopList {
     )
    private List<RecipesList> recipesList;
 
-    @OneToMany(mappedBy = "shopList", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "shopList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ProductsListShop> productsListShop;
 
 }
