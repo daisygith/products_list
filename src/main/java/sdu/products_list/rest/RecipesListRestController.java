@@ -30,13 +30,13 @@ public class RecipesListRestController {
 
         // add mapping for GET /recipeslist/{recipeID}
     @GetMapping("recipeslist/{recipeId}")
-    public RecipesListDTO getRecipe(@PathVariable int recipeId){
+    public RecipesListDTO getRecipe(@PathVariable int recipeId) throws Exception{
 
         RecipesListDTO theRecipe = recipesListService.findById(recipeId);
 
-        if(theRecipe == null){
-            throw new RuntimeException("Recipe id not found - " + recipeId);
-        }
+//        if(theRecipe == null){
+//            throw new RuntimeException("Recipe id not found - " + recipeId);
+//        }
         return theRecipe;
     }
 //
@@ -61,13 +61,10 @@ public class RecipesListRestController {
     }
 
     @DeleteMapping("/recipeslist/{recipeId}")
-    public String deleteRecipe(@PathVariable int recipeId){
+    public String deleteRecipe(@PathVariable int recipeId) throws Exception{
 
         RecipesListDTO tempRecipe = recipesListService.findById(recipeId);
 
-        if(tempRecipe == null){
-            throw new RuntimeException("Recipe is not found - " + recipeId);
-        }
         recipesListService.deleteById(recipeId);
 
         return "delete recipe id - " + recipeId;
