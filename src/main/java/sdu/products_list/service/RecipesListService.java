@@ -8,7 +8,7 @@ import java.util.List;
 public interface RecipesListService {
     List<RecipesListDTO> findAll();
 
-    RecipesListDTO findById(int theId);
+    RecipesListDTO findById(int theId) throws Exception;
 
     RecipesListDTO save(RecipesListDTO theRecipeDTO);
 
