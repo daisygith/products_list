@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import sdu.products_list.entity.RecipesList;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class RecipesListDAOImpl implements RecipesListDAO{
@@ -35,10 +36,10 @@ public class RecipesListDAOImpl implements RecipesListDAO{
     }
 
     @Override
-    public RecipesList findById(int theId) {
+    public Optional<RecipesList> findById(int theId) {
 
         // get recipe
-        RecipesList theRecipe = entityManager.find(RecipesList.class, theId);
+        Optional<RecipesList> theRecipe = Optional.ofNullable(entityManager.find(RecipesList.class, theId));
 
         return theRecipe;
     }
