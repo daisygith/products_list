@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import sdu.products_list.dto.ShopListDTO;
 import sdu.products_list.service.ShopListService;
 
-import java.util.List;
 
+import java.util.List;
 @RestController
 @RequestMapping("/shop")
 public class ShopListRestController {
@@ -22,13 +22,9 @@ public class ShopListRestController {
     @GetMapping("/shoplist/{shopListId}")
     public ShopListDTO getShopList(@PathVariable int shopListId){
 
-        ShopListDTO theShopList = shopListService.findById(shopListId);
+            ShopListDTO theShopList = shopListService.findById(shopListId);
 
-        if(theShopList == null){
-            throw new RuntimeException("The product is not found - " + shopListId);
-        }
-
-        return theShopList;
+            return theShopList;
 
     }
 
