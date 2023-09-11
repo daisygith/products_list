@@ -1,8 +1,11 @@
 package sdu.products_list.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.server.ResponseStatusException;
 import sdu.products_list.dao.ShopListDAO;
 import sdu.products_list.dto.ProductsListShopDTO;
 import sdu.products_list.dto.RecipesListDTO;
@@ -11,9 +14,13 @@ import sdu.products_list.entity.ProductsList;
 import sdu.products_list.entity.ProductsListShop;
 import sdu.products_list.entity.RecipesList;
 import sdu.products_list.entity.ShopList;
+import sdu.products_list.exception.ElementNotFoundException;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,26 +47,30 @@ public class ShopListServiceImpl implements ShopListService{
     }
 
     @Override
-    public ShopListDTO findById(int theId) {
+    public ShopListDTO findById(int theId) throws ElementNotFoundException{
 
-        ShopList productShopList = shopListDAO.findById(theId);
+        try {
 
-        ShopListDTO productShopListDTO = ShopListDTO.builder()
-                .id(productShopList.getId())
-                .name(productShopList.getName())
-                .productsListShop(productShopList.getProductsListShop().stream()
-                        .map(x-> ProductsListShopDTO.builder()
-                                .id(x.getId())
-                                .qty(x.getQty())
-                                .productsListId(x.getProductsList().getId())
-                                .productsListName(x.getProductsList().getName())
-                                .productsListUnit(x.getProductsList().getUnit())
-                                .build()).collect(Collectors.toList()))
-                .build();
+            ShopList productShopList = shopListDAO.findById(theId);
 
+            ShopListDTO productShopListDTO = ShopListDTO.builder()
+                    .id(productShopList.getId())
+                    .name(productShopList.getName())
+                    .productsListShop(productShopList.getProductsListShop().stream()
+                            .map(x -> ProductsListShopDTO.builder()
+                                    .id(x.getId())
+                                    .qty(x.getQty())
+                                    .productsListId(x.getProductsList().getId())
+                                    .productsListName(x.getProductsList().getName())
+                                    .productsListUnit(x.getProductsList().getUnit())
+                                    .build()).collect(Collectors.toList()))
+                    .build();
 
-
-        return productShopListDTO;
+            return productShopListDTO;
+        }
+        catch (NullPointerException id) {
+            throw new ElementNotFoundException(theId, "ShopList");
+        }
 
     }
 
