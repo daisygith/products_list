@@ -42,7 +42,7 @@ public class ShopListServiceImpl implements ShopListService{
     }
 
     @Override
-    public ShopListDTO findById(int theId) throws ElementNotFoundException{
+    public ShopListDTO findById(int theId) throws Exception{
 
         try {
 

@@ -10,7 +10,7 @@ public interface ShopListService {
 
     List<ShopListDTO> findAll();
 
-    ShopListDTO findById(int theId) throws ElementNotFoundException;
+    ShopListDTO findById(int theId) throws Exception;
 
     ShopListDTO save(ShopListDTO theShopListDTO);
 
