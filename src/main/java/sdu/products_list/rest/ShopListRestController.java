@@ -20,7 +20,7 @@ public class ShopListRestController {
     }
 
     @GetMapping("/shoplist/{shopListId}")
-    public ShopListDTO getShopList(@PathVariable int shopListId){
+    public ShopListDTO getShopList(@PathVariable int shopListId) throws Exception{
 
             ShopListDTO theShopList = shopListService.findById(shopListId);
 
@@ -47,7 +47,7 @@ public class ShopListRestController {
     }
 
     @DeleteMapping("/shoplist/{shopListId}")
-    public String deleteShopList(@PathVariable int shopListId) {
+    public String deleteShopList(@PathVariable int shopListId) throws Exception{
 
         ShopListDTO tempShopList = shopListService.findById(shopListId);
 
