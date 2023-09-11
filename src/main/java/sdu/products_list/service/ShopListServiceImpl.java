@@ -128,7 +128,7 @@ public class ShopListServiceImpl implements ShopListService{
 
     @Transactional
     @Override
-    public void deleteById(int theId) {
+    public void deleteById(int theId){
 
         shopListDAO.deleteById(theId);
 
