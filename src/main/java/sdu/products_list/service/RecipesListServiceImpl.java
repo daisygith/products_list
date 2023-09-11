@@ -9,6 +9,7 @@ import sdu.products_list.entity.ProductsListRecipe;
 import sdu.products_list.entity.RecipesList;
 import sdu.products_list.dao.RecipesListDAO;
 import sdu.products_list.entity.StepList;
+import sdu.products_list.exception.ElementNotFoundException;
 
 
 import java.util.ArrayList;
@@ -40,9 +41,10 @@ public class RecipesListServiceImpl implements RecipesListService {
     }
 
     @Override
-    public RecipesListDTO findById(int theId) {
+    public RecipesListDTO findById(int theId) throws Exception {
 
-        RecipesList productRecipe = recipesListDAO.findById(theId);
+        RecipesList productRecipe = recipesListDAO.findById(theId).orElseThrow(() -> new ElementNotFoundException(
+                theId, "RecipesList"));
 
         productRecipe.getShopList();
 
@@ -53,11 +55,6 @@ public class RecipesListServiceImpl implements RecipesListService {
                         .map(x -> StepListDTO.builder()
                                 .id(x.getId()).stepNr(x.getStepNr()).description(x.getDescription())
                                 .build()).collect(Collectors.toList()))
-//                .shopListSet(productRecipe.getShopList().stream()
-//                        .map(x-> ShopListDTO.builder()
-//                                .id(x.getId())
-//                                .name(x.getName())
-//                                .build()).collect(Collectors.toList()))
                 .productsListRecipe(productRecipe.getProductsListRecipes().stream()
                         .map(x -> ProductsListRecipeDTO.builder()
                                 .id(x.getId())
