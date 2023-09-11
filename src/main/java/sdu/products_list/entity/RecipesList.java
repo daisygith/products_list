@@ -28,7 +28,7 @@ public class RecipesList {
     @OneToMany(mappedBy = "recipesList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StepList> stepList;
 
-    @OneToMany(mappedBy = "recipesList", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "recipesList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ProductsListRecipe> productsListRecipes;
 
     @ManyToMany(fetch = FetchType.LAZY,
