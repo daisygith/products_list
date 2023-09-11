@@ -25,11 +25,9 @@ public class ProductsListRestController {
 
     @GetMapping("/productslist/{productslistId}")
     public ProductsListDTO getProductsList(@PathVariable int productslistId) throws Exception {
+
         ProductsListDTO theProductsList = productsListService.findById(productslistId);
 
-//        if(theProductsList == null){
-//            throw new RuntimeException("Products List id not found" + productslistId);
-//        }
         return theProductsList;
 
     }
