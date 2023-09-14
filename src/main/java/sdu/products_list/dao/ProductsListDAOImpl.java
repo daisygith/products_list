@@ -5,26 +5,26 @@ import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import sdu.products_list.entity.ProductsList;
+import sdu.products_list.exception.DataBaseException;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ProductsListDAOImpl implements ProductsListDAO{
+public class ProductsListDAOImpl implements ProductsListDAO {
 
     // define field for entity manager
     private EntityManager entityManager;
 
     @Autowired
-    public ProductsListDAOImpl(EntityManager entityManager){
+    public ProductsListDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Override
     public List<ProductsList> findAllProducts() {
 
-        TypedQuery<ProductsList> query = entityManager.createQuery(
-                "from ProductsList", ProductsList.class);
+        TypedQuery<ProductsList> query = entityManager.createQuery("from ProductsList", ProductsList.class);
 
 
         List<ProductsList> productslist = query.getResultList();
@@ -36,25 +36,38 @@ public class ProductsListDAOImpl implements ProductsListDAO{
     @Override
     public Optional<ProductsList> findById(int theId) {
 
-        Optional<ProductsList> theProductsList = Optional.ofNullable(entityManager.find(ProductsList.class, theId));
-
-        return theProductsList;
+        try {
+            Optional<ProductsList> theProductsList = Optional.ofNullable(entityManager.find(ProductsList.class, theId));
+            return theProductsList;
+        } catch (IllegalArgumentException e) {
+            throw new DataBaseException();
+        }
     }
 
     @Override
     public ProductsList save(ProductsList theProducts) {
 
-        ProductsList dbProducts = entityManager.merge(theProducts);
-
-        return dbProducts;
+        try {
+            ProductsList dbProducts = entityManager.merge(theProducts);
+            return dbProducts;
+        } catch (IllegalArgumentException e) {
+            throw new DataBaseException();
+        }
     }
 
     @Override
     public void deleteById(int theId) {
-        // first find the products on the list
-        ProductsList theProductsList = entityManager.find(ProductsList.class, theId);
-        // next remove this products
-        entityManager.remove(theProductsList);
+        try {
+            Optional<ProductsList> theProductsList = Optional.ofNullable(entityManager.find(ProductsList.class, theId));
 
+            if (theProductsList.isPresent()) {
+                entityManager.remove(theProductsList.get());
+            }
+
+        } catch (IllegalArgumentException e) {
+
+            throw new DataBaseException();
+
+        }
     }
 }

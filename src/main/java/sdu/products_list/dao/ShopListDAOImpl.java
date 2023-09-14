@@ -4,24 +4,25 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import sdu.products_list.dto.ShopListDTO;
 import sdu.products_list.entity.ShopList;
+import sdu.products_list.exception.DataBaseException;
 
 import java.util.List;
 
 @Repository
-public class ShopListDAOImpl implements ShopListDAO{
+public class ShopListDAOImpl implements ShopListDAO {
 
 
     private EntityManager entityManager;
 
     @Autowired
-    public ShopListDAOImpl(EntityManager entityManager){
+    public ShopListDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Override
     public List<ShopList> findAllShopList() {
+
 
         // stworzyć zapytanie
         TypedQuery<ShopList> query = entityManager.createQuery("from ShopList", ShopList.class);
@@ -30,31 +31,49 @@ public class ShopListDAOImpl implements ShopListDAO{
         List<ShopList> shopList = query.getResultList();
 
         return shopList;
+
     }
 
     @Override
-    public ShopList findById(int theId) {
+    public ShopList findById(int theId) throws Exception {
 
-        ShopList theShopList = entityManager.find(ShopList.class, theId);
+        try {
+            ShopList theShopList = entityManager.find(ShopList.class, theId);
 
-        return theShopList;
+            return theShopList;
+
+        } catch (IllegalArgumentException e) {
+            throw new DataBaseException();
+        }
     }
+
 
     @Override
     public ShopList save(ShopList theShopList) {
 
-        ShopList dbShopList = entityManager.merge(theShopList);
+        try {
 
-        return dbShopList;
+            ShopList dbShopList = entityManager.merge(theShopList);
+
+            return dbShopList;
+
+        } catch (IllegalArgumentException e) {
+            throw new DataBaseException();
+        }
     }
 
     @Override
     public void deleteById(int theId) {
 
-        // najpierw znaleźć
-        ShopList theShopList = entityManager.find(ShopList.class, theId);
+        try {
+            // najpierw znaleźć
+            ShopList theShopList = entityManager.find(ShopList.class, theId);
 
-        entityManager.remove(theShopList);
+            entityManager.remove(theShopList);
+
+        } catch (IllegalArgumentException e) {
+            throw new DataBaseException();
+        }
     }
 
 
