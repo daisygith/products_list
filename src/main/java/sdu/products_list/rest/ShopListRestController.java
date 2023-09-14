@@ -3,9 +3,11 @@ package sdu.products_list.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sdu.products_list.dto.ShopListDTO;
+import sdu.products_list.exception.ElementNotFoundException;
 import sdu.products_list.service.ShopListService;
 
 
+import java.sql.SQLException;
 import java.util.List;
 @RestController
 @RequestMapping("/shop")
@@ -22,14 +24,14 @@ public class ShopListRestController {
     @GetMapping("/shoplist/{shopListId}")
     public ShopListDTO getShopList(@PathVariable int shopListId) throws Exception{
 
-            ShopListDTO theShopList = shopListService.findById(shopListId);
 
-            return theShopList;
+        ShopListDTO theShopList = shopListService.findById(shopListId);
 
+        return theShopList;
     }
 
     @PostMapping("/shoplist")
-    public ShopListDTO addShopList(@RequestBody ShopListDTO theShopList){
+    public ShopListDTO addShopList(@RequestBody ShopListDTO theShopList) {
 
 //        theShopList.setId(0);
 
