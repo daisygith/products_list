@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ShopListService {
 
-    List<ShopListDTO> findAll();
+    List<ShopListDTO> findAll() ;
 
     ShopListDTO findById(int theId) throws Exception;
 

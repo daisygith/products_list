@@ -1,5 +1,6 @@
 package sdu.products_list.service;
 
+import org.hibernate.exception.SQLGrammarException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import sdu.products_list.entity.ShopList;
 import sdu.products_list.exception.ElementNotFoundException;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,7 +47,6 @@ public class ShopListServiceImpl implements ShopListService{
     public ShopListDTO findById(int theId) throws Exception{
 
         try {
-
             ShopList productShopList = shopListDAO.findById(theId);
 
             ShopListDTO productShopListDTO = ShopListDTO.builder()
@@ -63,16 +64,16 @@ public class ShopListServiceImpl implements ShopListService{
 
             return productShopListDTO;
         }
-        catch (NullPointerException id) {
+        catch (NullPointerException e) {
             throw new ElementNotFoundException(theId, "ShopList");
         }
+        }
 
-    }
 
 
     @Transactional
     @Override
-    public ShopListDTO save(ShopListDTO theShopListDTO) {
+    public ShopListDTO save(ShopListDTO theShopListDTO){
 
         ShopList shopList1 = ShopList.builder()
                         .id(theShopListDTO.getId())
