@@ -3,11 +3,9 @@ package sdu.products_list.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sdu.products_list.dto.ShopListDTO;
-import sdu.products_list.exception.ElementNotFoundException;
 import sdu.products_list.service.ShopListService;
 
 
-import java.sql.SQLException;
 import java.util.List;
 @RestController
 @RequestMapping("/shop")
