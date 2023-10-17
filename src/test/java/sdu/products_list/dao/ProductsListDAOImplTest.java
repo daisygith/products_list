@@ -15,7 +15,8 @@ import sdu.products_list.TestConfig;
 import sdu.products_list.entity.ProductsList;
 
 
-
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
@@ -29,7 +30,7 @@ class ProductsListDAOImplTest {
     private ProductsListDAO productsListDAO;
 
     @Test
-    public void ProductListDAO_SaveAll_ReturnSaveProduct(){
+    public void ProductsListDAO_SaveAll_ReturnSaveProductsList(){
 
         //Arrange
         ProductsList productList = ProductsList.builder()
@@ -45,17 +46,58 @@ class ProductsListDAOImplTest {
 
     }
 
-//    @Test
-//    void findById() {
-//        var findID = new ProductsList();
-//        assertNotNull(findID.getId());
-//    }
-//
-//    @Test
-//    void save() {
-//    }
-//
-//    @Test
-//    void deleteById() {
-//    }
+    @Test
+    public void ProductsListDAO_GetAll_ReturnMoreThenOneProductsList(){
+
+        ProductsList productList = ProductsList.builder()
+                .name("testName_ProductListDAO")
+                .unit("testUnit_ProductListDAO").build();
+        ProductsList productList2 = ProductsList.builder()
+                .name("testName_ProductListDAO")
+                .unit("testUnit_ProductListDAO").build();
+
+        productsListDAO.save(productList);
+        productsListDAO.save(productList2);
+
+        List<ProductsList> productsList_2 = productsListDAO.findAllProducts();
+
+        Assertions.assertNotNull(productsList_2);
+        Assertions.assertEquals(2,productsList_2.size());
+
+    }
+
+    @Test
+    public void ProductsListDAO_FindById_ReturnProductsList(){
+
+        ProductsList productList = ProductsList.builder()
+                .name("testName_ProductListDAO")
+                .unit("testUnit_ProductListDAO").build();
+
+        productsListDAO.save(productList);
+
+
+        Optional<ProductsList> productsList_2 = Optional.ofNullable(productsListDAO.findById(productList.getId())).get();
+
+        Assertions.assertNotNull(productsList_2);
+
+    }
+
+    @Test
+    public void ProductsListDAO_ProductListDelete_ReturnProductsListIsEmpty(){
+
+        ProductsList productList = ProductsList.builder()
+                .name("testName_ProductListDAO")
+                .unit("testUnit_ProductListDAO").build();
+
+        productsListDAO.save(productList);
+
+        productsListDAO.deleteById(productList.getId());
+
+
+        Optional<ProductsList> productsListReturn = Optional.ofNullable(productsListDAO.findById(productList.getId())).get();
+
+        Assertions.assertTrue(productsListReturn.isEmpty());
+
+    }
+
 }
