@@ -4,7 +4,6 @@ package sdu.products_list.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sdu.products_list.dto.ProductsListDTO;
-import sdu.products_list.entity.ProductsList;
 import sdu.products_list.service.ProductsListService;
 
 import java.util.List;
