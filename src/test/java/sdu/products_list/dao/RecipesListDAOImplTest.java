@@ -14,6 +14,7 @@ import sdu.products_list.TestConfig;
 import sdu.products_list.entity.RecipesList;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
@@ -61,7 +62,37 @@ class RecipesListDAOImplTest {
     }
 
     @Test
-    public void Rec
+    public void RecipesListDAO_FindById_ReturnRecipesList(){
+
+        RecipesList recipesList = RecipesList.builder()
+                .name("testName_RecipesListDAO")
+                .build();
+
+        recipesListDAO.save(recipesList);
+
+        Optional<RecipesList> recipesListReturn = Optional.ofNullable(recipesListDAO.findById(recipesList.getId())).get();
+
+        Assertions.assertNotNull(recipesListReturn);
+
+    }
+
+    @Test
+    public void RecipesListDAO_RecipesListDelete_ReturnRecipesListIsEmpty(){
+
+        RecipesList recipesList = RecipesList.builder()
+                .name("testName_RecipesListDAO")
+                .build();
+
+        recipesListDAO.save(recipesList);
+
+        recipesListDAO.deleteById(recipesList.getId());
+
+        Optional<RecipesList> recipesListReturn = Optional.ofNullable(recipesListDAO.findById(recipesList.getId())).get();
+
+        Assertions.assertTrue(recipesListReturn.isEmpty());
+        Assertions.assertEquals(true,recipesListReturn.isEmpty());
+
+    }
 
 
 
