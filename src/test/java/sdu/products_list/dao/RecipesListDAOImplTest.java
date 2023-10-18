@@ -40,7 +40,25 @@ class RecipesListDAOImplTest {
 
     }
 
+    @Test
+    public void ProductsListDAO_GetAll_ReturnMoreThenOneRecipesList(){
 
+        RecipesList recipesList = RecipesList.builder()
+                .name("testName_RecipesListDAO")
+                .build();
+        RecipesList recipesList2 = RecipesList.builder()
+                .name("testName2_RecipesListDAO")
+                .build();
+
+        recipesListDAO.save(recipesList);
+        recipesListDAO.save(recipesList2);
+
+        List<RecipesList> recipesList_2 = recipesListDAO.findAll();
+
+        Assertions.assertNotNull(recipesList_2);
+        Assertions.assertEquals(2,recipesList_2.size());
+
+    }
 
 
 
