@@ -14,6 +14,9 @@ import sdu.products_list.TestConfig;
 import sdu.products_list.entity.ProductsList;
 import sdu.products_list.entity.ShopList;
 
+import java.util.List;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -38,6 +41,26 @@ class ShopListDAOImplTest {
         Assertions.assertNotNull(saveTest);
         Assertions.assertNotNull(saveTest.getId());
 
+    }
+
+    @Test
+    public void ShopListDAO_GetAll_ReturnMoreThanOneShopList(){
+
+        ShopList shopList = ShopList.builder()
+                .name("testName_ShopListDAO")
+                .build();
+
+        ShopList shopList2 = ShopList.builder()
+                .name("testName2_ShopListDAO")
+                .build();
+
+        shopListDAO.save(shopList);
+        shopListDAO.save(shopList2);
+
+        List<ShopList> shopList_2 = Optional.ofNullable(shopListDAO.findAllShopList()).get();
+
+        Assertions.assertNotNull(shopList_2);
+        Assertions.assertEquals(2,shopList_2.size());
     }
 
 }
