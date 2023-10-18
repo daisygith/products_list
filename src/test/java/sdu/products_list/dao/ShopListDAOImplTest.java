@@ -57,10 +57,25 @@ class ShopListDAOImplTest {
         shopListDAO.save(shopList);
         shopListDAO.save(shopList2);
 
-        List<ShopList> shopList_2 = Optional.ofNullable(shopListDAO.findAllShopList()).get();
+        List<ShopList> shopList_2 = shopListDAO.findAllShopList();
 
         Assertions.assertNotNull(shopList_2);
         Assertions.assertEquals(2,shopList_2.size());
     }
+
+//    @Test
+//    public void ShopListDAO_FindById_ReturnShopList() throws Exception {
+//
+//        ShopList shopList = ShopList.builder()
+//                .name("testName_ShopListDAO")
+//                .build();
+//
+//        shopListDAO.save(shopList);
+//
+//        ShopList shopListReturn = shopListDAO.findById(shopList.getId());
+//
+//        //Assertions.assertNotNull(shopListReturn);
+//
+//    }
 
 }
