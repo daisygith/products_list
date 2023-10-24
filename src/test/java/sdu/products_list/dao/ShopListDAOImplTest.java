@@ -63,19 +63,38 @@ class ShopListDAOImplTest {
         Assertions.assertEquals(2,shopList_2.size());
     }
 
-//    @Test
-//    public void ShopListDAO_FindById_ReturnShopList() throws Exception {
-//
-//        ShopList shopList = ShopList.builder()
-//                .name("testName_ShopListDAO")
-//                .build();
-//
-//        shopListDAO.save(shopList);
-//
-//        ShopList shopListReturn = shopListDAO.findById(shopList.getId());
-//
-//        //Assertions.assertNotNull(shopListReturn);
-//
-//    }
+    @Test
+    public void ShopListDAO_FindById_ReturnShopList() {
+
+        ShopList shopList = ShopList.builder()
+                .name("testName_ShopListDAO")
+                .build();
+
+        ShopList savedShopList = shopListDAO.save(shopList);
+
+        ShopList shopListReturn = shopListDAO.findById(savedShopList.getId());
+
+        Assertions.assertNotNull(shopListReturn);
+
+    }
+
+    @Test
+    public void ShopListDAO_ShopListDelete_ReturnShopListIsEmpty(){
+
+        ShopList shopList = ShopList.builder()
+                .name("testName_ShopListDAO")
+                .build();
+
+        ShopList saveShopList = shopListDAO.save(shopList);
+
+        shopListDAO.deleteById(saveShopList.getId());
+
+        ShopList shopListReturn = shopListDAO.findById(saveShopList.getId());
+
+        Assertions.assertNull(shopListReturn);
+
+
+
+    }
 
 }
