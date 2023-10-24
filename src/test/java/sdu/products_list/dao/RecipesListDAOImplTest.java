@@ -68,9 +68,9 @@ class RecipesListDAOImplTest {
                 .name("testName_RecipesListDAO")
                 .build();
 
-        recipesListDAO.save(recipesList);
+        RecipesList saveRecipesList = recipesListDAO.save(recipesList);
 
-        Optional<RecipesList> recipesListReturn = Optional.ofNullable(recipesListDAO.findById(recipesList.getId())).get();
+        RecipesList recipesListReturn = recipesListDAO.findById(saveRecipesList.getId()).get();
 
         Assertions.assertNotNull(recipesListReturn);
 
@@ -83,14 +83,13 @@ class RecipesListDAOImplTest {
                 .name("testName_RecipesListDAO")
                 .build();
 
-        recipesListDAO.save(recipesList);
+        RecipesList saveRecipesList = recipesListDAO.save(recipesList);
 
-        recipesListDAO.deleteById(recipesList.getId());
+        recipesListDAO.deleteById(saveRecipesList.getId());
 
-        Optional<RecipesList> recipesListReturn = Optional.ofNullable(recipesListDAO.findById(recipesList.getId())).get();
+        Optional<RecipesList> recipesListReturn = recipesListDAO.findById(saveRecipesList.getId());
 
         Assertions.assertTrue(recipesListReturn.isEmpty());
-        Assertions.assertEquals(true,recipesListReturn.isEmpty());
 
     }
 
