@@ -35,7 +35,7 @@ public class ShopListDAOImpl implements ShopListDAO {
     }
 
     @Override
-    public ShopList findById(int theId) throws Exception {
+    public ShopList findById(int theId){
 
         try {
             ShopList theShopList = entityManager.find(ShopList.class, theId);
