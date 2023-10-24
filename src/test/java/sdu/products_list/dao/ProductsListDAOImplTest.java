@@ -73,10 +73,9 @@ class ProductsListDAOImplTest {
                 .name("testName_ProductListDAO")
                 .unit("testUnit_ProductListDAO").build();
 
-        productsListDAO.save(productList);
+        ProductsList saveProductsList = productsListDAO.save(productList);
 
-
-        Optional<ProductsList> productsList_2 = Optional.ofNullable(productsListDAO.findById(productList.getId())).get();
+        ProductsList productsList_2 = productsListDAO.findById(saveProductsList.getId()).get();
 
         Assertions.assertNotNull(productsList_2);
 
@@ -89,14 +88,13 @@ class ProductsListDAOImplTest {
                 .name("testName_ProductListDAO")
                 .unit("testUnit_ProductListDAO").build();
 
-        productsListDAO.save(productList);
+        ProductsList saveProductsList = productsListDAO.save(productList);
 
-        productsListDAO.deleteById(productList.getId());
+        productsListDAO.deleteById(saveProductsList.getId());
 
+        Optional<ProductsList> productListReturn = productsListDAO.findById(saveProductsList.getId());
 
-        Optional<ProductsList> productsListReturn = Optional.ofNullable(productsListDAO.findById(productList.getId())).get();
-
-        Assertions.assertTrue(productsListReturn.isEmpty());
+        Assertions.assertTrue(productListReturn.isEmpty());
 
     }
 
