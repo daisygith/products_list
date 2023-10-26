@@ -13,6 +13,7 @@ import sdu.products_list.dto.ProductsListDTO;
 import sdu.products_list.entity.ProductsList;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -34,6 +35,21 @@ class ProductsListServiceImplTest {
         when(productsListDAO.findAllProducts()).thenReturn(productsList);
 
         List<ProductsListDTO> saveProductsList = productsListService.findAllProducts();
+
+        Assertions.assertNotNull(saveProductsList);
+
+    }
+
+    @Test
+    public void ProductsListService_findById_ReturnsProductsListDTO() throws Exception {
+
+        ProductsList productList = ProductsList.builder()
+                .name("testName_ProductListDAO")
+                .unit("testUnit_ProductListDAO").build();
+
+        when(productsListDAO.findById(1)).thenReturn(Optional.ofNullable(productList));
+
+        ProductsListDTO saveProductsList = productsListService.findById(1);
 
         Assertions.assertNotNull(saveProductsList);
 
