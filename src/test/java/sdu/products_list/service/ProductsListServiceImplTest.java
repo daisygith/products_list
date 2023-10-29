@@ -11,7 +11,11 @@ import org.springframework.data.domain.Page;
 import sdu.products_list.dao.ProductsListDAO;
 import sdu.products_list.dto.ProductsListDTO;
 import sdu.products_list.entity.ProductsList;
+import sdu.products_list.entity.ProductsListRecipe;
+import sdu.products_list.entity.ProductsListShop;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,10 +48,15 @@ class ProductsListServiceImplTest {
     public void ProductsListService_findById_ReturnsProductsListDTO() throws Exception {
 
         ProductsList productList = ProductsList.builder()
+                .id(1)
                 .name("testName_ProductListDAO")
-                .unit("testUnit_ProductListDAO").build();
+                .unit("testUnit_ProductListDAO")
+                .productsListRecipes(new ArrayList<>())
+                .productsListShop(new ArrayList<>())
+                .build();
 
-        when(productsListDAO.findById(1)).thenReturn(Optional.ofNullable(productList));
+        when(productsListDAO.findById(1))
+                .thenReturn(Optional.ofNullable(productList));
 
         ProductsListDTO saveProductsList = productsListService.findById(1);
 
