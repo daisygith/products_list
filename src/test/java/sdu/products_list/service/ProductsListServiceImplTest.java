@@ -61,9 +61,33 @@ class ProductsListServiceImplTest {
         ProductsListDTO saveProductsList = productsListService.findById(1);
 
         Assertions.assertNotNull(saveProductsList);
+    }
 
+    @Test
+    public void ProductsListService_save_ReturnProductsListDTO(){
 
+        ProductsList productList = ProductsList.builder()
+                .id(1)
+                .name("testName_ProductListDAO")
+                .unit("testUnit_ProductListDAO")
+                .productsListRecipes(new ArrayList<>())
+                .productsListShop(new ArrayList<>())
+                .build();
 
+        ProductsListDTO productListDTO = ProductsListDTO.builder()
+                .id(1)
+                .name("testName_ProductListDAO")
+                .unit("testUnit_ProductListDAO")
+                .productsListRecipe(new ArrayList<>())
+                .productsListShop(new ArrayList<>())
+                .build();
+
+       // when(productsListDAO.findById(1)).thenReturn(Optional.ofNullable(productList));
+        when(productsListDAO.save(Mockito.any(ProductsList.class))).thenReturn(productList);
+
+        ProductsListDTO saveProductsList = productsListService.save(productListDTO);
+
+        Assertions.assertNotNull(saveProductsList);
 
     }
 
