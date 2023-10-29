@@ -91,4 +91,20 @@ class ProductsListServiceImplTest {
 
     }
 
+    @Test
+    public void ProductsListService_deleteById_ReturnProductsList(){
+        ProductsList productList = ProductsList.builder()
+                .id(1)
+                .name("testName_ProductListDAO")
+                .unit("testUnit_ProductListDAO")
+                .productsListRecipes(new ArrayList<>())
+                .productsListShop(new ArrayList<>())
+                .build();
+
+      //  when(productsListDAO.findById(1)).thenReturn(Optional.ofNullable(productList));
+
+        assertAll(() -> productsListService.deleteById(1));
+
+    }
+
 }
