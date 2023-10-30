@@ -75,7 +75,7 @@ class RecipesListServiceImplTest {
                 .productsListRecipe(new ArrayList<>())
                 .build();
 
-        when(recipesListDAO.save(Mockito.mock(RecipesList.class))).thenReturn(recipesList);
+        when(recipesListDAO.save(Mockito.any(RecipesList.class))).thenReturn(recipesList);
 
         RecipesListDTO saveRecipesList = recipesListService.save(recipesListDTO);
 
@@ -84,5 +84,19 @@ class RecipesListServiceImplTest {
 
     @Test
     void RecipesListService_deleteById() {
+        RecipesList recipesList = RecipesList.builder()
+                .id(1)
+                .name("testName_RecipesListDAO")
+                .stepList(new ArrayList<>())
+                .shopList(new ArrayList<>())
+                .productsListRecipes(new ArrayList<>())
+                .build();
+
+        when(recipesListDAO.findById(1)).thenReturn(
+                Optional.of(recipesList)
+        );
+
+        assertAll(() -> recipesListService.deleteById(1));
+
     }
 }
