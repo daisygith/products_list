@@ -17,7 +17,7 @@ class ShopListServiceImplTest {
     private ShopListServiceImpl shopListService;
 
     @Test
-    void findAll() {
+    void ShopListService_findAll() {
     }
 
     @Test
