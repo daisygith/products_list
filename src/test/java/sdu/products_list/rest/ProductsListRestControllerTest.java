@@ -74,11 +74,11 @@ class ProductsListRestControllerTest {
         given(productsListService.save(ArgumentMatchers.any()))
                 .willAnswer((invocation -> invocation.getArgument(0)));
 
-        ResultActions resultActions = mockMvc.perform(post("/api/productsList")
+        ResultActions resultActions = mockMvc.perform(post("/api/productslist")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsBytes(productsListDTO)));
 
-        resultActions.andExpect(MockMvcResultMatchers.status().isCreated());
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
 
 
     }
