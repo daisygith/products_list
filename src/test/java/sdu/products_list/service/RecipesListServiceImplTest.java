@@ -28,7 +28,7 @@ class RecipesListServiceImplTest {
     private RecipesListServiceImpl recipesListService;
 
     @Test
-    void RecipesListService_findAll_ReturnRecipesList() {
+    public void RecipesListService_findAll_ReturnRecipesList() {
 
         List<RecipesList> recipesList = Mockito.mock(List.class);
 
@@ -40,7 +40,7 @@ class RecipesListServiceImplTest {
     }
 
     @Test
-    void RecipesListService_findById_ReturnRecipesList() throws Exception{
+    public void RecipesListService_findById_ReturnRecipesList() throws Exception{
         RecipesList recipesList = RecipesList.builder()
                 .id(1)
                 .name("testName_RecipesListDAO")
@@ -57,7 +57,7 @@ class RecipesListServiceImplTest {
     }
 
     @Test
-    void RecipesListService_save_ReturnRecipesList() {
+    public void RecipesListService_save_ReturnRecipesList() {
         RecipesList recipesList = RecipesList.builder()
                 .id(1)
                 .name("testName_RecipesListDAO")
@@ -82,7 +82,7 @@ class RecipesListServiceImplTest {
     }
 
     @Test
-    void RecipesListService_deleteById() {
+    public void RecipesListService_deleteById() {
         RecipesList recipesList = RecipesList.builder()
                 .id(1)
                 .name("testName_RecipesListDAO")
@@ -91,9 +91,8 @@ class RecipesListServiceImplTest {
                 .productsListRecipes(new ArrayList<>())
                 .build();
 
-        when(recipesListDAO.findById(1)).thenReturn(
-                Optional.of(recipesList)
-        );
+       // when(recipesListDAO.findById(1)).thenReturn(
+      //          Optional.of(recipesList));
 
         assertAll(() -> recipesListService.deleteById(1));
 
