@@ -68,7 +68,7 @@ class RecipesListServiceImplTest {
 
         RecipesListDTO recipesListDTO = RecipesListDTO.builder()
                 .id(1)
-                .name("testName_RecipesListDAO")
+                .name("testName_RecipesListDTO")
                 .stepList(new ArrayList<>())
                 .shopListSet(new ArrayList<>())
                 .productsListRecipe(new ArrayList<>())
