@@ -1,6 +1,7 @@
 package sdu.products_list.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -80,9 +81,8 @@ class ProductsListRestControllerTest {
                 .content(objectMapper.writeValueAsBytes(productsListDTO)));
 
         resultActions.andExpect(MockMvcResultMatchers.status().isOk())
-                .andDo(MockMvcResultHandlers.print());
-
-
+                .andExpect(MockMvcResultMatchers.jsonPath("$['name']", CoreMatchers.is(productsListDTO.getName())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$['unit']", CoreMatchers.is(productsListDTO.getUnit())));
     }
 
     @Test
