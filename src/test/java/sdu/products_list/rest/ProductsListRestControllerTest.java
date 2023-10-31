@@ -17,16 +17,19 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
 import sdu.products_list.dto.ProductsListDTO;
 import sdu.products_list.entity.ProductsList;
 import sdu.products_list.service.ProductsListService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @WebMvcTest(controllers =  ProductsListRestController.class)
 @AutoConfigureMockMvc(addFilters = false)
@@ -63,7 +66,16 @@ class ProductsListRestControllerTest {
     }
 
     @Test
-    void findAllProducts() {
+    public void ProductsListRestController_findAllProducts_ReturnAll() throws Exception{
+
+      when(productsListService.findAllProducts()).thenReturn((List<ProductsListDTO>) productsListDTO);
+
+        ResultActions resultActions = mockMvc.perform(get("/api/productslist")
+                .contentType(MediaType.APPLICATION_JSON));
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$['productslist']",CoreMatchers.is((productsListDTO.getClass()))));
+
     }
 
     @Test
