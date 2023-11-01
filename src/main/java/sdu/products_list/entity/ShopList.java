@@ -20,10 +20,10 @@ public class ShopList {
     // dodanie kolumn
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY) // primary key
-    @Column(name= "id")
+    @Column(name="id")
     private int id;
 
-    @Column(name = "name")
+    @Column(name="name")
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY,
