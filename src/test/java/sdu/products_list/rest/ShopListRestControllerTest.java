@@ -121,6 +121,15 @@ class ShopListRestControllerTest {
     }
 
     @Test
-    void deleteShopList() {
+    void ShopListRestController_deleteShopList_ReturnShopList() throws Exception {
+        int shopListID = 1;
+
+        when(shopListService.findById(shopListID)).thenReturn(shopListDTO);
+        doNothing().when(shopListService).deleteById(shopListID);
+
+        ResultActions resultActions = mockMvc.perform(delete("/shop/shoplist/1")
+                .contentType(MediaType.APPLICATION_JSON));
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
     }
 }
