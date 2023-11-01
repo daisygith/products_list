@@ -123,6 +123,17 @@ class RecipesListRestControllerTest {
     }
 
     @Test
-    void deleteRecipe() {
+    void RecipesListRestControllers_deleteRecipe_ReturnRecipesList() throws Exception {
+
+        int recipesListID = 1;
+
+        when(recipesListService.findById(recipesListID)).thenReturn(recipesListDTO);
+        doNothing().when(recipesListService).deleteById(recipesListID);
+
+        ResultActions resultActions = mockMvc.perform(delete("/rec/recipeslist/1")
+                .contentType(MediaType.APPLICATION_JSON));
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+
     }
 }
