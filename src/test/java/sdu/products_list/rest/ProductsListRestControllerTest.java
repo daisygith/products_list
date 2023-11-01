@@ -79,7 +79,18 @@ class ProductsListRestControllerTest {
     }
 
     @Test
-    void getProductsList() {
+    public void ProductsListRestController_getProductsList_ReturnProductsListDTO() throws Exception{
+        int productsListID = 1;
+        when(productsListService.findById(productsListID)).thenReturn(productsListDTO);
+
+        ResultActions resultActions = mockMvc.perform(get("/api/productslist/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(productsListDTO)));
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$['name']", CoreMatchers.is(productsListDTO.getName())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$['unit']", CoreMatchers.is(productsListDTO.getUnit())));
+
     }
 
     @Test
