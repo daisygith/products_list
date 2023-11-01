@@ -80,7 +80,7 @@ class ShopListRestControllerTest {
     }
 
     @Test
-    void RecipesListRestController_getShopList_ReturnShopListDTO() throws Exception{
+    public void RecipesListRestController_getShopList_ReturnShopListDTO() throws Exception{
         int shopListID = 1;
 
         when(shopListService.findById(shopListID)).thenReturn(shopListDTO);
@@ -94,7 +94,7 @@ class ShopListRestControllerTest {
     }
 
     @Test
-    void ShopListRestController_addShopList_ReturnCreated() throws Exception{
+    public void ShopListRestController_addShopList_ReturnCreated() throws Exception{
         given(shopListService.save(ArgumentMatchers.any()))
                 .willAnswer((invocation -> invocation.getArgument(0)));
 
@@ -107,7 +107,7 @@ class ShopListRestControllerTest {
     }
 
     @Test
-    void ShopListRestController_updateShopList_ReturnProductsListDTO() throws Exception {
+    public void ShopListRestController_updateShopList_ReturnProductsListDTO() throws Exception {
         int shopListID = 1;
 
         when(shopListService.save(shopListDTO)).thenReturn(shopListDTO);
@@ -121,7 +121,7 @@ class ShopListRestControllerTest {
     }
 
     @Test
-    void ShopListRestController_deleteShopList_ReturnShopList() throws Exception {
+    public void ShopListRestController_deleteShopList_ReturnShopList() throws Exception {
         int shopListID = 1;
 
         when(shopListService.findById(shopListID)).thenReturn(shopListDTO);
