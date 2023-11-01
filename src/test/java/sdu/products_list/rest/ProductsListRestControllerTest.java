@@ -14,7 +14,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -28,6 +30,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
+import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -109,7 +112,19 @@ class ProductsListRestControllerTest {
     }
 
     @Test
-    void updateProducts() {
+    public void ProductsListRestController_updateProducts_ReturnProductsListDTO() throws Exception {
+        int productsListID = 1;
+        when(productsListService.save(productsListDTO)).thenReturn(productsListDTO);
+
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.put("/api/productslist")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(productsListDTO)));
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$['name']", CoreMatchers.is(productsListDTO.getName())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$['unit']", CoreMatchers.is(productsListDTO.getUnit())));
+
+
     }
 
     @Test
