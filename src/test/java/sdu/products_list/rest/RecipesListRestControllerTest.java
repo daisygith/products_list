@@ -67,7 +67,7 @@ class RecipesListRestControllerTest {
     }
 
     @Test
-    void RecipesListRestControllers_findAll_ReturnAll() throws Exception {
+    public void RecipesListRestControllers_findAll_ReturnAll() throws Exception {
 
         List<RecipesListDTO> returnRecipesList = Arrays.asList(recipesListDTO);
 
@@ -80,7 +80,7 @@ class RecipesListRestControllerTest {
     }
 
     @Test
-    void RecipesListRestControllers_getRecipe_RetrunRecipesListDTO() throws Exception{
+    public void RecipesListRestControllers_getRecipe_RetrunRecipesListDTO() throws Exception{
         int recipesListID = 1;
         when(recipesListService.findById(recipesListID)).thenReturn(recipesListDTO);
 
@@ -94,7 +94,7 @@ class RecipesListRestControllerTest {
     }
 
     @Test
-    void RecipesListRestControllers_addRecipe_ReturnCreated() throws Exception {
+    public void RecipesListRestControllers_addRecipe_ReturnCreated() throws Exception {
 
         given(recipesListService.save(ArgumentMatchers.any()))
                 .willAnswer((invocation -> invocation.getArgument(0)));
@@ -109,7 +109,7 @@ class RecipesListRestControllerTest {
     }
 
     @Test
-    void RecipesListRestControllers_updateRecipe_ReturnRecipesListDTO() throws Exception{
+    public void RecipesListRestControllers_updateRecipe_ReturnRecipesListDTO() throws Exception{
         int recipesListID = 1;
         when(recipesListService.save(recipesListDTO)).thenReturn(recipesListDTO);
 
@@ -123,7 +123,7 @@ class RecipesListRestControllerTest {
     }
 
     @Test
-    void RecipesListRestControllers_deleteRecipe_ReturnRecipesList() throws Exception {
+    public void RecipesListRestControllers_deleteRecipe_ReturnRecipesList() throws Exception {
 
         int recipesListID = 1;
 
