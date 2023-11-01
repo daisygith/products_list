@@ -1,6 +1,7 @@
 package sdu.products_list.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.CacheControl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -76,7 +78,17 @@ class ShopListRestControllerTest {
     }
 
     @Test
-    void getShopList() {
+    void RecipesListRestController_getShopList_ReturnShopListDTO() throws Exception{
+        int shopListID = 1;
+
+        when(shopListService.findById(shopListID)).thenReturn(shopListDTO);
+
+        ResultActions resultActions = mockMvc.perform(get("/shop/shoplist/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(shopListDTO)));
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$['name']", CoreMatchers.is(shopListDTO.getName())));
     }
 
     @Test
