@@ -5,6 +5,7 @@ import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import sdu.products_list.dto.RecipesListDTO;
 import sdu.products_list.entity.ProductsList;
@@ -92,11 +94,32 @@ class RecipesListRestControllerTest {
     }
 
     @Test
-    void addRecipe() {
+    void RecipesListRestControllers_addRecipe_ReturnCreated() throws Exception {
+
+        given(recipesListService.save(ArgumentMatchers.any()))
+                .willAnswer((invocation -> invocation.getArgument(0)));
+
+        ResultActions resultActions = mockMvc.perform(post("/rec/recipeslist")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsBytes(recipesListDTO)));
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$['name']", CoreMatchers.is(recipesListDTO.getName())));
+
     }
 
     @Test
-    void updateRecipe() {
+    void RecipesListRestControllers_updateRecipe_ReturnRecipesListDTO() throws Exception{
+        int recipesListID = 1;
+        when(recipesListService.save(recipesListDTO)).thenReturn(recipesListDTO);
+
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.put("/rec/recipeslist")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(recipesListDTO)));
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$['name']", CoreMatchers.is(recipesListDTO.getName())));
+
     }
 
     @Test
