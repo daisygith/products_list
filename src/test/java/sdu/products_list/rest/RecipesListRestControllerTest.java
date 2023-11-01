@@ -1,6 +1,7 @@
 package sdu.products_list.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -77,7 +78,17 @@ class RecipesListRestControllerTest {
     }
 
     @Test
-    void getRecipe() {
+    void RecipesListRestControllers_getRecipe_RetrunRecipesListDTO() throws Exception{
+        int recipesListID = 1;
+        when(recipesListService.findById(recipesListID)).thenReturn(recipesListDTO);
+
+        ResultActions resultActions = mockMvc.perform(get("/rec/recipeslist/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(recipesListDTO)));
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$['name']", CoreMatchers.is(recipesListDTO.getName())));
+
     }
 
     @Test
