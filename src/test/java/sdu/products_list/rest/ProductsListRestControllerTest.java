@@ -29,10 +29,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @WebMvcTest(controllers =  ProductsListRestController.class)
 @AutoConfigureMockMvc(addFilters = false)
@@ -128,6 +128,17 @@ class ProductsListRestControllerTest {
     }
 
     @Test
-    void deleteProducts() {
+    public void ProductsListRestController_deleteProducts_ReturnProductsList() throws Exception {
+
+        int productsListID = 1;
+
+        when(productsListService.findById(productsListID)).thenReturn(productsListDTO);
+        doNothing().when(productsListService).deleteById(productsListID);
+
+        ResultActions resultActions = mockMvc.perform(delete("/api/productslist/1")
+                .contentType(MediaType.APPLICATION_JSON));
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+
     }
 }
