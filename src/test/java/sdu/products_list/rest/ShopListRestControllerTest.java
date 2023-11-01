@@ -16,6 +16,7 @@ import org.springframework.http.CacheControl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import sdu.products_list.dto.ShopListDTO;
 import sdu.products_list.entity.ShopList;
@@ -106,7 +107,17 @@ class ShopListRestControllerTest {
     }
 
     @Test
-    void updateShopList() {
+    void ShopListRestController_updateShopList_ReturnProductsListDTO() throws Exception {
+        int shopListID = 1;
+
+        when(shopListService.save(shopListDTO)).thenReturn(shopListDTO);
+
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.put("/shop/shoplist")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(shopListDTO)));
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$['name']", CoreMatchers.is(shopListDTO.getName())));
     }
 
     @Test
