@@ -5,6 +5,7 @@ import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,7 +93,16 @@ class ShopListRestControllerTest {
     }
 
     @Test
-    void addShopList() {
+    void ShopListRestController_addShopList_ReturnCreated() throws Exception{
+        given(shopListService.save(ArgumentMatchers.any()))
+                .willAnswer((invocation -> invocation.getArgument(0)));
+
+        ResultActions resultActions = mockMvc.perform(post("/shop/shoplist")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsBytes(shopListDTO)));
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$['name']", CoreMatchers.is(shopListDTO.getName())));
     }
 
     @Test
