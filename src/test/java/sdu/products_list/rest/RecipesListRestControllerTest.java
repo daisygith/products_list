@@ -61,7 +61,7 @@ class RecipesListRestControllerTest {
         recipesListDTO = RecipesListDTO.builder()
                 .name("testName_RecipesListDTO")
                 .stepList(new ArrayList<>())
-                .shopListSet(new ArrayList<>())
+                //.shopListSet(new ArrayList<>())
                 .productsListRecipe(new ArrayList<>())
                 .build();
     }
