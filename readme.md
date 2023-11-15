@@ -18,6 +18,6 @@ Uruchomić kod można przez umieszczenie kodu z pliku w kliencie bazy MySQL.
 Do zrobienia zostało m.in:
 - generowanie listy zakupów - usprawnienie pracy z aplikacją
 - refaktoring ropozytoriów do JpaRepository - pozwala na usunięcie implementacji
-  warstwy DAO. Dzięki temu, rozbudowywująć interfejs, uzyskane zostaną bardziej
+  warstwy DAO. Dzięki temu, rozbudowywując interfejs, uzyskane zostaną bardziej
   odpowiednie metody CRUD dla standardowego dostępu do danych które są udostępniane
   w standardowym DAO.
